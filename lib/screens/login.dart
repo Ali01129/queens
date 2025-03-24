@@ -1,0 +1,104 @@
+import 'package:flutter/material.dart';
+import 'package:queens/components/checkBox.dart';
+import 'package:queens/components/textField.dart';
+import 'package:responsive_sizer/responsive_sizer.dart';
+
+class Login extends StatefulWidget {
+  const Login({super.key});
+
+  @override
+  State<Login> createState() => _LoginState();
+}
+
+class _LoginState extends State<Login> {
+
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+  FocusNode emailFocusNode = FocusNode();
+  FocusNode passwordFocusNode = FocusNode();
+
+  bool isDarkMode(BuildContext context) {
+    return Theme.of(context).brightness == Brightness.dark;
+  }
+
+  bool _validateEmail(String email) {
+    final emailRegex = RegExp(r"^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$");
+    return emailRegex.hasMatch(email);
+  }
+  bool _validatePassword(String password) {
+    return password.length >= 6;
+  }
+
+
+  @override
+  Widget build(BuildContext context) {
+    bool darkMode = isDarkMode(context);
+    return Scaffold(
+      backgroundColor: darkMode?Color(0xFF181e22):Colors.white,
+      body: SafeArea(
+        child: Padding(
+          padding: EdgeInsets.all(4.w),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Center(
+                child: Column(
+                  mainAxisSize: MainAxisSize.min, // Makes Column take minimum space vertically
+                  children: [
+                    Image.asset(
+                      darkMode ? 'assets/logo-dark.png' : 'assets/logo-light.png',
+                      width: 40.w,
+                      fit: BoxFit.contain,
+                    ),
+                    SizedBox(height:6.h),
+                    Text("Sign in to your account",
+                      style: TextStyle(
+                        fontWeight: FontWeight.w600,
+                        fontSize: 18.sp,
+                        color: darkMode?Colors.white:Colors.black,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              SizedBox(height: 2.h,),
+              Text("Email",
+                style: TextStyle(
+                  fontSize: 17.sp,
+                  fontWeight: FontWeight.w500,
+                  color: darkMode?Colors.white:Colors.black
+                ),
+              ),
+              SizedBox(height: 1.h,),
+              CustomTextfield(
+                controller: emailController,
+                focusNode: emailFocusNode,
+                validator: _validateEmail,
+                hintText: "Enter your email",
+                isPassword: false,
+              ),
+              SizedBox(height: 2.h,),
+              Text("Password",
+                style: TextStyle(
+                    fontSize: 17.sp,
+                    fontWeight: FontWeight.w500,
+                    color: darkMode?Colors.white:Colors.black
+                ),
+              ),
+              SizedBox(height: 1.h,),
+              CustomTextfield(
+                controller: passwordController,
+                focusNode: passwordFocusNode,
+                validator: _validatePassword,
+                hintText: "Enter your password",
+                isPassword: true,
+              ),
+              CustomCheckbox()
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}

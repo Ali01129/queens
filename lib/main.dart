@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:queens/screens/login.dart';
+import 'package:queens/screens/onboarding.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:queens/screens/splashScreen.dart';
 
@@ -18,7 +20,7 @@ class MyApp extends StatelessWidget {
           themeMode: ThemeMode.system,
           theme: ThemeData.light(),
           darkTheme: ThemeData.dark(),
-          home: const SplashScreen(),
+          home: const Login(),
         );
       },
     );
