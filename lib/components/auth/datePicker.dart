@@ -39,11 +39,7 @@ class _BirthDatePickerState extends State<BirthDatePicker> {
   @override
   Widget build(BuildContext context) {
     bool darkMode = isDarkMode(context);
-    Color borderColor = _isDateSelected
-        ? Colors.green
-        : (widget.focusNode.hasFocus
-        ? const Color(0xFF0D5EF9)
-        : (darkMode ? const Color(0xFF44484c) : const Color(0xFFe3e3e4)));
+    Color borderColor = darkMode ? const Color(0xFF44484c) : const Color(0xFFe3e3e4);
 
     return InkWell(
       onTap: () => _pickDate(context),

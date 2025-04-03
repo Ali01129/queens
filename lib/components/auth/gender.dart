@@ -11,40 +11,43 @@ class GenderDropdown extends StatefulWidget {
 }
 
 class _GenderDropdownState extends State<GenderDropdown> {
+  bool isDarkMode(BuildContext context) {
+    return Theme.of(context).brightness == Brightness.dark;
+  }
   String selectedGender = 'Male';
 
   @override
   Widget build(BuildContext context) {
+    bool darkMode = isDarkMode(context);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
           "Gender",
           style: TextStyle(
-            fontSize: 16.sp,
-            color: Colors.white,
-            fontWeight: FontWeight.w500,
-          ),
+              fontSize: 17.sp,
+              fontWeight: FontWeight.w500,
+              color: darkMode ? Colors.white : Colors.black),
         ),
         SizedBox(height: 1.h),
         Container(
-          width: double.infinity, // Full width
-          padding: EdgeInsets.symmetric(horizontal: 4.w, vertical: 1.h),
+          width: double.infinity,
+          padding: EdgeInsets.symmetric(horizontal: 4.w, vertical: 0.6.h),
           decoration: BoxDecoration(
-            color: Color(0xFF2F3438), // Updated color
+            color: darkMode?Color(0xFF2F3438):Color(0xFFF9F9F9),
             borderRadius: BorderRadius.circular(10),
-            border: Border.all(color: Colors.green, width: 1.5),
+            border: Border.all(color:darkMode ? const Color(0xFF44484c) : const Color(0xFFe3e3e4), width: 1.5),
           ),
           child: DropdownButtonHideUnderline(
             child: DropdownButton<String>(
               value: selectedGender,
-              isExpanded: true, // Makes sure it takes full width
+              isExpanded: true,
               items: ['Male', 'Female', 'Other']
                   .map((gender) => DropdownMenuItem(
                 value: gender,
                 child: Text(
                   gender,
-                  style: TextStyle(color: Colors.green, fontSize: 16.sp),
+                  style: TextStyle(color: darkMode?Colors.white:Colors.black, fontSize: 16.sp),
                 ),
               ))
                   .toList(),
@@ -52,10 +55,10 @@ class _GenderDropdownState extends State<GenderDropdown> {
                 setState(() {
                   selectedGender = value!;
                 });
-                widget.onGenderChanged(value!); // Pass value back to parent
+                widget.onGenderChanged(value!);
               },
-              icon: Icon(Icons.arrow_drop_down, color: Colors.green),
-              dropdownColor: Color(0xFF2F3438),
+              icon: Icon(Icons.arrow_drop_down, color: darkMode?Colors.white:Colors.black),
+              dropdownColor: darkMode?Color(0xFF2F3438):Color(0xFFF9F9F9),
             ),
           ),
         ),

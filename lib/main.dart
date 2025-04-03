@@ -3,6 +3,7 @@ import 'package:queens/screens/bio.dart';
 import 'package:queens/screens/login.dart';
 import 'package:queens/screens/onboarding.dart';
 import 'package:queens/screens/register.dart';
+import 'package:queens/screens/uploadPhoto.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:queens/screens/splashScreen.dart';
 
@@ -22,7 +23,7 @@ class MyApp extends StatelessWidget {
           themeMode: ThemeMode.system,
           theme: ThemeData.light(),
           darkTheme: ThemeData.dark(),
-          home: const Bio(),
+          home: const Uploadphoto(),
         );
       },
     );

@@ -128,7 +128,7 @@ class _BioState extends State<Bio> {
               padding: EdgeInsets.all(4.w),
               child: Button(
                 title: "NEXT",
-                textColor: darkMode ? Colors.white : Colors.black,
+                textColor: Colors.white,
                 bg: Color(0xFF0d5ef9),
                 onTapCallback: () {
                   print(nameController.text);
