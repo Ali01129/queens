@@ -20,10 +20,18 @@ class MyApp extends StatelessWidget {
       builder: (context, orientation, screenType) {
         return MaterialApp(
           debugShowCheckedModeBanner: false,
+          initialRoute: '/',
+          routes: {
+            '/': (context) => const SplashScreen(),
+            '/login':(context)=>const Login(),
+            '/register':(context)=>const Register(),
+            '/onboarding':(context)=>const Onboarding(),
+            '/uploadPhoto':(context)=>const Uploadphoto(),
+            '/bio':(context)=>const Bio(),
+          },
           themeMode: ThemeMode.system,
           theme: ThemeData.light(),
           darkTheme: ThemeData.dark(),
-          home: const Uploadphoto(),
         );
       },
     );

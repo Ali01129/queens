@@ -14,11 +14,19 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   @override
+  void initState(){
+    super.initState();
+    Future.delayed(const Duration(seconds: 5),(){
+      Navigator.pushReplacementNamed(context, '/login');
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
     bool darkMode = isDarkMode(context);
 
     return Scaffold(
-      backgroundColor: darkMode ? Colors.black : Colors.white,
+      backgroundColor: darkMode ? Color(0xFF181e22) : Colors.white,
       body: Container(
         decoration: BoxDecoration(
           image: DecorationImage(

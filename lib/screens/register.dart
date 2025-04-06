@@ -1,3 +1,4 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:queens/components/auth/others.dart';
 import 'package:queens/components/button.dart';
@@ -129,7 +130,9 @@ class _RegisterState extends State<Register> {
                   title: "SIGN UP",
                   textColor: Colors.white,
                   bg: Color(0xFF0d5ef9),
-                  onTapCallback: () {},
+                  onTapCallback: () {
+                    Navigator.pushNamed(context, '/bio');
+                  },
                 ),
                 SizedBox(height: 3.h),
                 Row(
@@ -177,6 +180,10 @@ class _RegisterState extends State<Register> {
                             color: Color(0xFF0d5ef9),
                             fontWeight: FontWeight.bold,
                           ),
+                            recognizer: TapGestureRecognizer()
+                              ..onTap=(){
+                                Navigator.pushReplacementNamed(context, '/login');
+                              }
                         ),
                       ],
                     ),

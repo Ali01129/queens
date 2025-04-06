@@ -1,3 +1,4 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:queens/components/auth/others.dart';
 import 'package:queens/components/button.dart';
@@ -153,6 +154,10 @@ class _LoginState extends State<Login> {
                               color: Color(0xFF0d5ef9),
                               fontWeight: FontWeight.bold
                             ),
+                            recognizer: TapGestureRecognizer()
+                              ..onTap=(){
+                                Navigator.pushReplacementNamed(context, '/register');
+                              }
                           ),
                         ]
                       )

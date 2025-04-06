@@ -135,6 +135,7 @@ class _BioState extends State<Bio> {
                   print(phoneController.text);
                   print(dateController.text);
                   print(selectedGender);
+                  Navigator.pushNamed(context, '/uploadPhoto');
                 },
               ),
             ),
