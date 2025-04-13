@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:queens/navigation/bottom.dart';
 import 'package:queens/screens/bio.dart';
 import 'package:queens/screens/login.dart';
 import 'package:queens/screens/onboarding.dart';
@@ -28,6 +29,7 @@ class MyApp extends StatelessWidget {
             '/onboarding':(context)=>const Onboarding(),
             '/uploadPhoto':(context)=>const Uploadphoto(),
             '/bio':(context)=>const Bio(),
+            '/bottom':(context)=> Bottom(),
           },
           themeMode: ThemeMode.system,
           theme: ThemeData.light(),

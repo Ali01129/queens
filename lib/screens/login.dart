@@ -101,7 +101,9 @@ class _LoginState extends State<Login> {
                 SizedBox(height: 1.h,),
                 CustomCheckbox(),
                 SizedBox(height: 3.h,),
-                Button(title: "SIGN IN", textColor: Colors.white, bg: Color(0xFF0d5ef9), onTapCallback: (){}),
+                Button(title: "SIGN IN", textColor: Colors.white, bg: Color(0xFF0d5ef9), onTapCallback: (){
+                  Navigator.pushReplacementNamed(context, '/bottom');
+                }),
                 SizedBox(height: 3.h,),
                 Center(
                   child: Text("Forgot Password?",
