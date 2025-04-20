@@ -1,0 +1,154 @@
+import 'package:flutter/material.dart';
+import 'package:responsive_sizer/responsive_sizer.dart';
+
+import '../components/backButton.dart';
+import '../components/colors/appColor.dart';
+import '../database/menuItemClass.dart';
+
+class Itempage extends StatelessWidget {
+  const Itempage({super.key});
+
+  bool isDarkMode(BuildContext context) {
+    return Theme.of(context).brightness == Brightness.dark;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final args = ModalRoute.of(context)!.settings.arguments as MenuItemArguments;
+    bool darkMode = isDarkMode(context);
+
+    return Scaffold(
+      backgroundColor: darkMode ? AppColors.darkbg : AppColors.lightbg,
+      body: SafeArea(
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              // Image with back button on top
+              Stack(
+                children: [
+                  SizedBox(
+                    width: 100.w,
+                    height: 40.h,
+                    child: Image.asset(
+                      args.image,
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                  Positioned(
+                    top: 2.h,
+                    left: 2.w,
+                    child: BackButtonWidget(darkMode: darkMode),
+                  ),
+                ],
+              ),
+
+              Padding(
+                padding: EdgeInsets.all(4.w),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    // Dish name
+                    Text(
+                      args.name,
+                      style: TextStyle(
+                        fontSize: 22.sp,
+                        fontWeight: FontWeight.bold,
+                        color: darkMode ? Colors.white : Colors.black,
+                      ),
+                    ),
+                    SizedBox(height: 2.h),
+
+                    // Row with rating, time, calories
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Row(
+                          children: [
+                            Icon(Icons.star, color: Colors.amber),
+                            SizedBox(width: 1.w),
+                            Text(
+                              "${args.rating}",
+                              style: TextStyle(fontSize: 16.sp),
+                            ),
+                          ],
+                        ),
+                        Row(
+                          children: [
+                            Icon(Icons.timer, color: darkMode ? Colors.white : Colors.black),
+                            SizedBox(width: 1.w),
+                            Text(
+                              "20 min",
+                              style: TextStyle(fontSize: 16.sp),
+                            ),
+                          ],
+                        ),
+                        Row(
+                          children: [
+                            Icon(Icons.local_fire_department, color: Colors.red),
+                            SizedBox(width: 1.w),
+                            Text(
+                              "${args.calories} cal",
+                              style: TextStyle(fontSize: 16.sp),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+
+                    SizedBox(height: 2.h),
+
+                    // Description
+                    Text(
+                      "This delicious ${args.name.toLowerCase()} is made with fresh ingredients and cooked to perfection. Perfect for a quick bite or a full meal.",
+                      style: TextStyle(
+                        fontSize: 16.sp,
+                        color: darkMode ? Colors.grey[300] : Colors.grey[800],
+                      ),
+                    ),
+
+                    SizedBox(height: 3.h),
+                    Divider(color: Colors.grey),
+
+                    // Price and Add to Cart button
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          "\$${args.price}",
+                          style: TextStyle(
+                            fontSize: 20.sp,
+                            fontWeight: FontWeight.bold,
+                            color: darkMode ? Colors.white : Colors.black,
+                          ),
+                        ),
+                        ElevatedButton(
+                          onPressed: () {
+                            // Add to cart logic
+                          },
+                          style: ElevatedButton.styleFrom(
+                            padding: EdgeInsets.symmetric(horizontal: 6.w, vertical: 1.5.h),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(12),
+                            ),
+                            backgroundColor: darkMode ? Colors.tealAccent[700] : Colors.teal,
+                          ),
+                          child: Text(
+                            "Add to Cart",
+                            style: TextStyle(
+                              fontSize: 16.sp,
+                              color: Colors.white,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}

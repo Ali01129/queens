@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:queens/components/colors/appColor.dart';
+import 'package:queens/components/home/categories.dart';
 import 'package:queens/components/home/horizontalScroll.dart';
 import 'package:queens/components/home/notification.dart';
+import 'package:queens/components/home/popular.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
 import '../components/home/searchBar.dart';
@@ -36,6 +38,10 @@ class Home extends StatelessWidget {
                   ),
                   SizedBox(height: 2.h,),
                   HorizontalImageCarousel(darkMode:darkMode,),
+                  SizedBox(height: 4.w,),
+                  Categories(darkMode: darkMode),
+                  SizedBox(height: 4.w,),
+                  Popular(darkMode: darkMode),
                 ],
               ),
             ),
