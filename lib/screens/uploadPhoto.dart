@@ -1,9 +1,12 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:queens/components/button.dart';
+import 'package:queens/database/sendImage.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:image_picker/image_picker.dart';
 import 'dart:io';
 
+import '../components/alert_dialog.dart';
 import '../components/backButton.dart';
 
 class Uploadphoto extends StatefulWidget {
@@ -28,6 +31,38 @@ class _UploadphotoState extends State<Uploadphoto> {
       setState(() {
         _image = File(pickedFile.path); // Store the selected image
       });
+    }
+  }
+
+  void upload()async{
+    if(_image!=null){
+      showDialog(
+        context: context,
+        barrierDismissible: false,
+        builder: (context) => const Center(child: CircularProgressIndicator()),
+      );
+      final uid = FirebaseAuth.instance.currentUser!.uid;
+      final imageService = sendImage();
+      final imageUrl = await imageService.uploadImageToSStorage(_image!, uid);
+      if (imageUrl != null) {
+        await imageService.saveImageUrlToFirestore(uid, imageUrl);
+        Navigator.pop(context);
+        Navigator.pushNamed(context, '/bottom');
+      }
+      else{
+        showCustomAlertDialog(
+          context,
+          'Error',
+          'Unexpected Error Uploading Image.',
+        );
+      }
+    }
+    else{
+      showCustomAlertDialog(
+        context,
+        'Error',
+        'Choose Image First.',
+      );
     }
   }
 
@@ -152,7 +187,7 @@ class _UploadphotoState extends State<Uploadphoto> {
                 title: "NEXT",
                 textColor: Colors.white,
                 bg: Color(0xFF0d5ef9),
-                onTapCallback: () {},
+                onTapCallback: upload,
               ),
             ),
           ],

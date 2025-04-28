@@ -73,6 +73,14 @@ class _RegisterState extends State<Register> {
             'The account already exists for that email.',
           );
         }
+        else{
+          Navigator.pop(context);
+          showCustomAlertDialog(
+            context,
+            'Error',
+            'Unexpected Error occurred.',
+          );
+        }
       } catch (e) {
         Navigator.pop(context);
         showCustomAlertDialog(

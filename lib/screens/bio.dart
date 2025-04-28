@@ -4,7 +4,11 @@ import "package:queens/components/auth/gender.dart";
 import "package:queens/components/backButton.dart";
 import "package:queens/components/button.dart";
 import "package:responsive_sizer/responsive_sizer.dart";
+import "../components/alert_dialog.dart";
 import "../components/textField.dart";
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+
 
 class Bio extends StatefulWidget {
   const Bio({super.key});
@@ -18,6 +22,24 @@ class _BioState extends State<Bio> {
     return Theme.of(context).brightness == Brightness.dark;
   }
 
+  Future<void> saveBasicUserInfo({
+    required String name,
+    required String gender,
+    required String phoneNumber,
+    required String dateOfBirth,
+  }) async {
+    final uid = FirebaseAuth.instance.currentUser!.uid;
+    final firestore = FirebaseFirestore.instance;
+    await firestore.collection('users').doc(uid).set({
+      'name': name,
+      'gender': gender,
+      'phoneNumber': phoneNumber,
+      'dateOfBirth': dateOfBirth,
+      'uid': uid,
+      'createdAt': FieldValue.serverTimestamp(),
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     bool darkMode = isDarkMode(context);
@@ -29,6 +51,31 @@ class _BioState extends State<Bio> {
     FocusNode phoneFocusNode = FocusNode();
 
     String selectedGender = "Male";
+
+    void sendData()async{
+      if (nameController.text.isEmpty ||selectedGender == null ||phoneController.text.isEmpty ||dateController.text.isEmpty) {
+        showCustomAlertDialog(
+          context,
+          'Error',
+          'Fill all the details first.',
+        );
+      }
+      else{
+        showDialog(
+          context: context,
+          builder: (context) {
+            return Center(child: CircularProgressIndicator());
+          },
+        );
+        await saveBasicUserInfo(
+          name: nameController.text,
+          gender: selectedGender,
+          phoneNumber: phoneController.text,
+          dateOfBirth: dateController.text,
+        );
+        Navigator.pushNamed(context, '/uploadPhoto');
+      }
+    }
 
     return Scaffold(
       backgroundColor: darkMode ? Color(0xFF181e22) : Colors.white,
@@ -130,13 +177,7 @@ class _BioState extends State<Bio> {
                 title: "NEXT",
                 textColor: Colors.white,
                 bg: Color(0xFF0d5ef9),
-                onTapCallback: () {
-                  print(nameController.text);
-                  print(phoneController.text);
-                  print(dateController.text);
-                  print(selectedGender);
-                  Navigator.pushNamed(context, '/uploadPhoto');
-                },
+                onTapCallback: sendData
               ),
             ),
           ],
