@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:queens/components/auth/others.dart';
@@ -5,6 +6,8 @@ import 'package:queens/components/button.dart';
 import 'package:queens/components/checkBox.dart';
 import 'package:queens/components/textField.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
+
+import '../components/alert_dialog.dart';
 
 class Login extends StatefulWidget {
   const Login({super.key});
@@ -32,6 +35,38 @@ class _LoginState extends State<Login> {
     return password.length >= 6;
   }
 
+  void login() async {
+    // Show loading dialog
+    showDialog(
+      context: context,
+      builder: (context) {
+        return Center(child: CircularProgressIndicator());
+      },
+    );
+
+    // Try login
+    try {
+      await FirebaseAuth.instance.signInWithEmailAndPassword(
+        email: emailController.text,
+        password: passwordController.text,
+      );
+      Navigator.pop(context);
+    } on FirebaseAuthException catch (e) {
+      Navigator.pop(context);
+      showCustomAlertDialog(
+        context,
+        'Login Failed',
+        'Enter valid Email and Password.',
+      );
+    } catch (e) {
+      Navigator.pop(context);
+      showCustomAlertDialog(
+        context,
+        'Error',
+        'An unexpected error occurred.',
+      );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -101,9 +136,7 @@ class _LoginState extends State<Login> {
                 SizedBox(height: 1.h,),
                 CustomCheckbox(),
                 SizedBox(height: 3.h,),
-                Button(title: "SIGN IN", textColor: Colors.white, bg: Color(0xFF0d5ef9), onTapCallback: (){
-                  Navigator.pushReplacementNamed(context, '/bottom');
-                }),
+                Button(title: "SIGN IN", textColor: Colors.white, bg: Color(0xFF0d5ef9), onTapCallback: login),
                 SizedBox(height: 3.h,),
                 Center(
                   child: Text("Forgot Password?",

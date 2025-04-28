@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:queens/screens/home.dart';
+import 'package:queens/screens/profile.dart';
 
 class Bottom extends StatefulWidget {
   @override
@@ -13,7 +14,7 @@ class _BottomState extends State<Bottom> {
     Home(),
     Center(child: Text('Cart')),
     Center(child: Text('Messages')),
-    Center(child: Text('Profile')),
+    Profile(),
   ];
 
   void _onItemTapped(int index) {

@@ -40,7 +40,7 @@ class Onboarding extends StatelessWidget {
               Button(
                 title: "NEXT",bg: Colors.white,textColor: Colors.black,
                 onTapCallback: (){
-                  Navigator.pushNamed(context, '/login');
+                  Navigator.pushNamed(context, '/authgate');
                 },
               ),
               SizedBox(height: 2.h,),

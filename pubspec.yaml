@@ -38,6 +38,8 @@ dependencies:
   responsive_sizer: ^3.3.1
   intl: ^0.20.2
   image_picker: ^1.1.2
+  firebase_core: ^3.13.0
+  firebase_auth: ^5.5.3
 
 dev_dependencies:
   flutter_test:

@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:queens/components/auth/others.dart';
@@ -5,6 +6,8 @@ import 'package:queens/components/button.dart';
 import 'package:queens/components/checkBox.dart';
 import 'package:queens/components/textField.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
+
+import '../components/alert_dialog.dart';
 
 class Register extends StatefulWidget {
   const Register({super.key});
@@ -36,6 +39,56 @@ class _RegisterState extends State<Register> {
 
   bool _validateRepeatPassword(String password) {
     return password == passwordController.text;
+  }
+
+  void register()async{
+    // Show loading dialog
+    showDialog(
+      context: context,
+      builder: (context) {
+        return Center(child: CircularProgressIndicator());
+      },
+    );
+    // try to register
+    if(passwordController.text==repeatPasswordController.text){
+      try {
+        final credential = await FirebaseAuth.instance.createUserWithEmailAndPassword(
+          email: emailController.text,
+          password: passwordController.text,
+        );
+        Navigator.pushNamed(context, '/bio');
+      } on FirebaseAuthException catch (e) {
+        if (e.code == 'weak-password') {
+          Navigator.pop(context);
+          showCustomAlertDialog(
+            context,
+            'Error',
+            'The password provided is too weak.',
+          );
+        } else if (e.code == 'email-already-in-use') {
+          Navigator.pop(context);
+          showCustomAlertDialog(
+            context,
+            'Error',
+            'The account already exists for that email.',
+          );
+        }
+      } catch (e) {
+        Navigator.pop(context);
+        showCustomAlertDialog(
+          context,
+          'Error',
+          'Unexpected Error occurred.',
+        );
+      }
+    }
+    else{
+      showCustomAlertDialog(
+        context,
+        'Error',
+        'Password and Confirm Password does not match.',
+      );
+    }
   }
 
   @override
@@ -130,9 +183,7 @@ class _RegisterState extends State<Register> {
                   title: "SIGN UP",
                   textColor: Colors.white,
                   bg: Color(0xFF0d5ef9),
-                  onTapCallback: () {
-                    Navigator.pushNamed(context, '/bio');
-                  },
+                  onTapCallback: register,
                 ),
                 SizedBox(height: 3.h),
                 Row(

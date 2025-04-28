@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "649015853184",
+    "project_id": "queens-f48e0",
+    "storage_bucket": "queens-f48e0.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:649015853184:android:b8f24fcd2d96e67faae665",
+        "android_client_info": {
+          "package_name": "com.example.queens"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAru50lv10nxal6g2Gi5j4NCxNP2iHkec4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
