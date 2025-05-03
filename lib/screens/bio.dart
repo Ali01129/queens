@@ -6,8 +6,7 @@ import "package:queens/components/button.dart";
 import "package:responsive_sizer/responsive_sizer.dart";
 import "../components/alert_dialog.dart";
 import "../components/textField.dart";
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import "../database/userData.dart";
 
 
 class Bio extends StatefulWidget {
@@ -22,24 +21,6 @@ class _BioState extends State<Bio> {
     return Theme.of(context).brightness == Brightness.dark;
   }
 
-  Future<void> saveBasicUserInfo({
-    required String name,
-    required String gender,
-    required String phoneNumber,
-    required String dateOfBirth,
-  }) async {
-    final uid = FirebaseAuth.instance.currentUser!.uid;
-    final firestore = FirebaseFirestore.instance;
-    await firestore.collection('users').doc(uid).set({
-      'name': name,
-      'gender': gender,
-      'phoneNumber': phoneNumber,
-      'dateOfBirth': dateOfBirth,
-      'uid': uid,
-      'createdAt': FieldValue.serverTimestamp(),
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     bool darkMode = isDarkMode(context);
@@ -51,6 +32,7 @@ class _BioState extends State<Bio> {
     FocusNode phoneFocusNode = FocusNode();
 
     String selectedGender = "Male";
+    UserData userData = UserData();
 
     void sendData()async{
       if (nameController.text.isEmpty ||selectedGender == null ||phoneController.text.isEmpty ||dateController.text.isEmpty) {
@@ -67,7 +49,7 @@ class _BioState extends State<Bio> {
             return Center(child: CircularProgressIndicator());
           },
         );
-        await saveBasicUserInfo(
+        await userData.saveUserData(
           name: nameController.text,
           gender: selectedGender,
           phoneNumber: phoneController.text,
