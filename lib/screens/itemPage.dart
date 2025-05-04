@@ -1,6 +1,7 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:queens/database/cartData.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
-
 import '../components/backButton.dart';
 import '../components/colors/appColor.dart';
 import '../database/menuItemClass.dart';
@@ -16,6 +17,17 @@ class Itempage extends StatelessWidget {
   Widget build(BuildContext context) {
     final args = ModalRoute.of(context)!.settings.arguments as MenuItemArguments;
     bool darkMode = isDarkMode(context);
+
+    final cart=CartData();
+    void add_to_cart()async{
+      await cart.addToCart(
+        userId: FirebaseAuth.instance.currentUser!.uid,
+        itemName: args.name,
+        price: args.price,
+        image: args.image,
+      );
+      Navigator.pop(context);
+    }
 
     return Scaffold(
       backgroundColor: darkMode ? AppColors.darkbg : AppColors.lightbg,
@@ -122,7 +134,7 @@ class Itempage extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        "\$${args.price}",
+                        "£${args.price}",
                         style: TextStyle(
                           fontSize: 20.sp,
                           fontWeight: FontWeight.bold,
@@ -130,9 +142,7 @@ class Itempage extends StatelessWidget {
                         ),
                       ),
                       ElevatedButton(
-                        onPressed: () {
-                          // Add to cart logic
-                        },
+                        onPressed:add_to_cart,
                         style: ElevatedButton.styleFrom(
                           padding: EdgeInsets.symmetric(horizontal: 6.w, vertical: 1.5.h),
                           shape: RoundedRectangleBorder(

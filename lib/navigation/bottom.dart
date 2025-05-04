@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:queens/screens/cart.dart';
 import 'package:queens/screens/home.dart';
 import 'package:queens/screens/profile.dart';
 
@@ -12,7 +13,7 @@ class _BottomState extends State<Bottom> {
 
   final List<Widget> _pages = [
     Home(),
-    Center(child: Text('Cart')),
+    Cart(),
     Center(child: Text('Messages')),
     Profile(),
   ];

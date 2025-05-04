@@ -24,11 +24,9 @@ class _ProfileState extends State<Profile> {
 
   Future<void> _loadUserData() async {
     final data = await UserData().getUserData();
-    print(data);
     setState(() {
       _userData = data;
     });
-    print(data);
   }
 
   void _signOut() {
