@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:queens/database/userData.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
+import '../components/bottomSheet.dart';
 import '../components/colors/appColor.dart';
 import '../components/profile/profileTile.dart';
 
@@ -87,7 +88,20 @@ class _ProfileState extends State<Profile> {
                 SizedBox(height: 1.h,),
                 Profiletile(darkMode: darkMode, name: 'App Settings', icon: Icon(Icons.settings, color: AppColors.containerText), onTapCallback: (){}),
                 SizedBox(height: 1.h,),
-                Profiletile(darkMode: darkMode, name: 'Logout', icon: Icon(Icons.logout_rounded, color: AppColors.containerText), onTapCallback: (){_signOut();}),
+                Profiletile(darkMode: darkMode, name: 'Logout', icon: Icon(Icons.power_settings_new, color: AppColors.containerText),
+                    onTapCallback: (){
+                      showDeleteBottomSheet(
+                        context,
+                        darkMode: darkMode,
+                        text: "Are you sure you want to Logout?",
+                        icon: Icons.power_settings_new,
+                        buttonText: "Yes, Logout",
+                        onDelete: () {
+                          _signOut();
+                        },
+                      );
+                    }
+                ),
                 SizedBox(height: 1.h,),
               ],
             ),

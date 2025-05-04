@@ -4,6 +4,7 @@ import 'package:queens/components/colors/appColor.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import '../../database/cartData.dart';
+import '../bottomSheet.dart';
 
 class Cartitem extends StatelessWidget {
   final bool darkMode;
@@ -49,7 +50,16 @@ class Cartitem extends StatelessWidget {
         extentRatio: 0.2,
         children: [
           SlidableAction(
-            onPressed: (context) => remove(),
+            onPressed: (context) => showDeleteBottomSheet(
+              context,
+              darkMode: darkMode,
+              text: "Are you sure you want to Delete this?",
+              icon: Icons.logout_rounded,
+              buttonText: "Yes, Delete",
+              onDelete: () {
+                remove();
+              },
+            ),
             backgroundColor: darkMode?Color(0xFF172437):Color(0xFFd8edf9),
             foregroundColor: AppColors.buttonPrimary,
             icon: Icons.delete_outline,
