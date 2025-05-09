@@ -6,6 +6,7 @@ import 'package:queens/screens/bio.dart';
 import 'package:queens/screens/itemPage.dart';
 import 'package:queens/screens/login.dart';
 import 'package:queens/screens/onboarding.dart';
+import 'package:queens/screens/paymentPage.dart';
 import 'package:queens/screens/register.dart';
 import 'package:queens/screens/uploadPhoto.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
@@ -47,6 +48,7 @@ class MyApp extends StatelessWidget {
             '/item':(context)=>Itempage(),
             '/authgate':(context)=>AuthGate(),
             '/addressPage':(context)=>Addresspage(),
+            '/paymentPage':(context)=>Paymentpage(),
           },
           themeMode: ThemeMode.system,
           theme: ThemeData.light(),

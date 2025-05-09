@@ -8,14 +8,14 @@ import '../components/cart/bill.dart';
 import '../components/cart/cartButton.dart';
 import '../components/colors/appColor.dart';
 
-class Addresspage extends StatefulWidget {
-  const Addresspage({super.key});
+class Paymentpage extends StatefulWidget {
+  const Paymentpage({super.key});
 
   @override
-  State<Addresspage> createState() => _AddresspageState();
+  State<Paymentpage> createState() => _PaymentpageState();
 }
 
-class _AddresspageState extends State<Addresspage> {
+class _PaymentpageState extends State<Paymentpage> {
   bool isDarkMode(BuildContext context) {
     return Theme.of(context).brightness == Brightness.dark;
   }
@@ -24,12 +24,14 @@ class _AddresspageState extends State<Addresspage> {
 
   List<Map<String, dynamic>> address = [
     {
-      'title': 'Home',
-      'subtitle': '123 Main Street, City, Country',
+      'title': 'Cash Payment',
+      'subtitle': 'Cash on Delivery',
+      'icon':'assets/cash.png'
     },
     {
-      'title': 'Work',
-      'subtitle': '456 Office Blvd, City, Country',
+      'title': 'Card Payment',
+      'subtitle': 'Card on Delivery',
+      'icon':'assets/card.png'
     },
   ];
 
@@ -49,7 +51,7 @@ class _AddresspageState extends State<Addresspage> {
                   BackButtonWidget(darkMode: darkMode),
                   SizedBox(width: 4.w),
                   Text(
-                    'Deliver to',
+                    'Payment method',
                     style: TextStyle(
                         fontSize: 18.sp,
                         fontWeight: FontWeight.bold,
@@ -60,7 +62,7 @@ class _AddresspageState extends State<Addresspage> {
               SizedBox(height: 2.h),
               Expanded(
                 child: address.isEmpty
-                    ? Center(child: Text("No Saved Address"))
+                    ? Center(child: Text("No Saved Payment Options"))
                     : ListView.builder(
                   itemCount: address.length + 1,
                   itemBuilder: (context, index) {
@@ -70,7 +72,7 @@ class _AddresspageState extends State<Addresspage> {
                         padding: EdgeInsets.only(bottom: 1.5.h),
                         child: Addresstile(
                           darkMode: darkMode,
-                          icon: 'assets/maps.png',
+                          icon: item['icon'],
                           title: item['title'],
                           subtitle: item['subtitle'],
                           isSelected: selectedIndex == index,
@@ -84,7 +86,7 @@ class _AddresspageState extends State<Addresspage> {
                     } else {
                       return Addbutton(
                         darkMode: darkMode,
-                        title: "Add Location +",
+                        title: "Add Card +",
                         onTapCallback: () {},
                       );
                     }
@@ -98,7 +100,7 @@ class _AddresspageState extends State<Addresspage> {
                   darkMode: darkMode,
                   title: "NEXT",
                   onTapCallback: () {
-                    Navigator.pushNamed(context, '/paymentPage');
+                    Navigator.pushNamed(context, '/addressPage');
                   },
                 ),
               ),
