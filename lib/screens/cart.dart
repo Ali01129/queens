@@ -79,7 +79,11 @@ class _CartState extends State<Cart> {
               ),
               Bill(darkMode: darkMode,cartTotal: cart,discount: discount,total: cart-discount,),
               SizedBox(height: 2.h,),
-              Cartbutton(darkMode: darkMode, title: "PLACE MY ORDER", onTapCallback: (){}),
+              Center(
+                child: Cartbutton(darkMode: darkMode, title: "PLACE MY ORDER", onTapCallback: (){
+                  Navigator.pushNamed(context, '/addressPage');
+                }),
+              ),
             ],
           ),
         ),

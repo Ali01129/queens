@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:queens/database/authGate.dart';
 import 'package:queens/navigation/bottom.dart';
+import 'package:queens/screens/addressPage.dart';
 import 'package:queens/screens/bio.dart';
 import 'package:queens/screens/itemPage.dart';
 import 'package:queens/screens/login.dart';
@@ -45,6 +46,7 @@ class MyApp extends StatelessWidget {
             '/bottom':(context)=> Bottom(),
             '/item':(context)=>Itempage(),
             '/authgate':(context)=>AuthGate(),
+            '/addressPage':(context)=>Addresspage(),
           },
           themeMode: ThemeMode.system,
           theme: ThemeData.light(),
