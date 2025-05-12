@@ -1,13 +1,15 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:queens/components/auth/others.dart';
 import 'package:queens/components/button.dart';
 import 'package:queens/components/checkBox.dart';
 import 'package:queens/components/textField.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
-
 import '../components/alert_dialog.dart';
+import '../database/userData.dart';
+import '../provider/userProvider.dart';
 
 class Login extends StatefulWidget {
   const Login({super.key});
@@ -51,6 +53,14 @@ class _LoginState extends State<Login> {
         password: passwordController.text,
       );
       Navigator.pop(context);
+
+      // adding data in provider
+      final userValue = Provider.of<UserProvider>(context, listen: false);
+      final data = await UserData().getUserData();
+      UserModel _user=UserModel(name: data?['name'], image: data?['imageUrl'], gender: data?['gender'], phone: data?['phoneNumber']);
+      userValue.setUser(_user);
+      // ending
+
     } on FirebaseAuthException catch (e) {
       Navigator.pop(context);
       showCustomAlertDialog(
