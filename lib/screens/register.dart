@@ -146,7 +146,6 @@ class _RegisterState extends State<Register> {
                 CustomTextfield(
                   controller: emailController,
                   focusNode: emailFocusNode,
-                  validator: _validateEmail,
                   hintText: "Enter your email",
                   isPassword: false,
                 ),
@@ -163,7 +162,6 @@ class _RegisterState extends State<Register> {
                 CustomTextfield(
                   controller: passwordController,
                   focusNode: passwordFocusNode,
-                  validator: _validatePassword,
                   hintText: "Enter your password",
                   isPassword: true,
                 ),
@@ -180,7 +178,6 @@ class _RegisterState extends State<Register> {
                 CustomTextfield(
                   controller: repeatPasswordController,
                   focusNode: repeatPasswordFocusNode,
-                  validator: _validateRepeatPassword,
                   hintText: "Re-enter your password",
                   isPassword: true,
                 ),

@@ -24,4 +24,11 @@ class CartProvider extends ChangeNotifier {
       cart += cartItems[i]['price'] * cartItems[i]['quantity'];
     }
   }
+
+  void clearCart() {
+    cartItems = [];
+    cart=0.0;
+    discount=0.0;
+    notifyListeners();
+  }
 }

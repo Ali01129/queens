@@ -47,7 +47,8 @@ class _UploadphotoState extends State<Uploadphoto> {
       if (imageUrl != null) {
         await imageService.saveImageUrlToFirestore(uid, imageUrl);
         Navigator.pop(context);
-        Navigator.pushNamed(context, '/bottom');
+        await FirebaseAuth.instance.signOut();
+        Navigator.pushNamed(context, '/login');
       }
       else{
         showCustomAlertDialog(

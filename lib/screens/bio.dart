@@ -102,9 +102,6 @@ class _BioState extends State<Bio> {
                     CustomTextfield(
                       controller: nameController,
                       focusNode: nameFocusNode,
-                      validator: (String name) {
-                        return name.trim().length >= 3;
-                      },
                       hintText: "Enter your full name",
                       isPassword: false,
                     ),
@@ -128,11 +125,6 @@ class _BioState extends State<Bio> {
                     CustomTextfield(
                       controller: phoneController,
                       focusNode: phoneFocusNode,
-                      validator: (String name) {
-                        final RegExp ukPhoneRegex =
-                        RegExp(r'^(?:\+44|0)7\d{9}$');
-                        return ukPhoneRegex.hasMatch(name.trim());
-                      },
                       hintText: "Enter your phone number",
                       isPassword: false,
                     ),

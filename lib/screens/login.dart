@@ -9,6 +9,7 @@ import 'package:queens/components/textField.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import '../components/alert_dialog.dart';
 import '../database/userData.dart';
+import '../navigation/bottom.dart';
 import '../provider/cartProvider.dart';
 import '../provider/userProvider.dart';
 
@@ -53,7 +54,11 @@ class _LoginState extends State<Login> {
         email: emailController.text,
         password: passwordController.text,
       );
-      Navigator.pop(context);
+      // Navigator.pop(context);
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => Bottom()),
+      );
 
       // adding data in provider
       final userValue = Provider.of<UserProvider>(context, listen: false);
@@ -125,7 +130,6 @@ class _LoginState extends State<Login> {
                 CustomTextfield(
                   controller: emailController,
                   focusNode: emailFocusNode,
-                  validator: _validateEmail,
                   hintText: "Enter your email",
                   isPassword: false,
                 ),
@@ -141,7 +145,6 @@ class _LoginState extends State<Login> {
                 CustomTextfield(
                   controller: passwordController,
                   focusNode: passwordFocusNode,
-                  validator: _validatePassword,
                   hintText: "Enter your password",
                   isPassword: true,
                 ),

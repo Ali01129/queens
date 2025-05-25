@@ -5,14 +5,28 @@ import 'package:queens/components/colors/appColor.dart';
 import 'package:queens/components/profile/profileTile.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import '../components/bottomSheet.dart';
+import '../provider/cartProvider.dart';
 import '../provider/userProvider.dart';
+import 'login.dart';
 
 class Profile extends StatelessWidget {
   const Profile({super.key});
 
-  void _signOut() {
-    FirebaseAuth.instance.signOut();
+  void _signOut(BuildContext context) async {
+    await FirebaseAuth.instance.signOut();
+
+    // Clear provider states (optional but recommended)
+    Provider.of<UserProvider>(context, listen: false).clearUser();
+    Provider.of<CartProvider>(context, listen: false).clearCart();
+
+    // Navigate to Login screen and clear all previous routes
+    Navigator.pushAndRemoveUntil(
+      context,
+      MaterialPageRoute(builder: (context) => const Login()),
+          (Route<dynamic> route) => false,
+    );
   }
+
 
   bool _isDarkMode(BuildContext context) {
     return Theme.of(context).brightness == Brightness.dark;
@@ -112,7 +126,7 @@ class Profile extends StatelessWidget {
                       icon: Icons.power_settings_new,
                       buttonText: "Yes, Logout",
                       onDelete: () {
-                        _signOut();
+                        _signOut(context);
                       },
                     );
                   },
