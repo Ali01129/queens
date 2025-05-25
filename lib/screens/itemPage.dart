@@ -1,10 +1,12 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:queens/database/cartData.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import '../components/backButton.dart';
 import '../components/colors/appColor.dart';
 import '../database/menuItemClass.dart';
+import '../provider/cartProvider.dart';
 
 class Itempage extends StatelessWidget {
   const Itempage({super.key});
@@ -26,6 +28,7 @@ class Itempage extends StatelessWidget {
         price: args.price,
         image: args.image,
       );
+      Provider.of<CartProvider>(context, listen: false).setCart();
       Navigator.pop(context);
     }
 

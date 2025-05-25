@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:queens/database/authGate.dart';
 import 'package:queens/navigation/bottom.dart';
-import 'package:queens/provider/userProvider.dart';
 import 'package:queens/screens/addressPage.dart';
 import 'package:queens/screens/bio.dart';
 import 'package:queens/screens/itemPage.dart';
@@ -15,7 +14,10 @@ import 'package:queens/screens/splashScreen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'firebase_options.dart';
+//provider
 import 'package:provider/provider.dart';
+import 'package:queens/provider/userProvider.dart';
+import 'package:queens/provider/cartProvider.dart';
 
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
@@ -30,6 +32,7 @@ void main() async{
       MultiProvider(
         providers: [
           ChangeNotifierProvider(create: (context)=>UserProvider()),
+          ChangeNotifierProvider(create: (context)=>CartProvider()),
         ],
         child: MyApp() ,
       ),

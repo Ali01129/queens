@@ -1,42 +1,16 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:queens/components/cart/bill.dart';
 import 'package:queens/components/cart/cartButton.dart';
 import 'package:queens/components/cart/cartItem.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import '../components/colors/appColor.dart';
 import '../database/cartData.dart';
+import '../provider/cartProvider.dart';
 
-class Cart extends StatefulWidget {
+class Cart extends StatelessWidget {
   const Cart({super.key});
-
-  @override
-  State<Cart> createState() => _CartState();
-}
-
-class _CartState extends State<Cart> {
-  final cartData = CartData();
-  final uid = FirebaseAuth.instance.currentUser!.uid;
-
-  List<Map<String, dynamic>> cartItems = [];
-
-  @override
-  void initState() {
-    super.initState();
-    _loadData();
-  }
-  double cart=0.0;
-  double discount=0.0;
-  void _loadData() async {
-    final items = await cartData.getCartItems(userId: uid);
-    setState(() {
-      cartItems = items;
-    });
-    cart=0.0;
-    for (int i = 0; i < cartItems.length; i++) {
-      cart += cartItems[i]['price'] * cartItems[i]['quantity'];
-    }
-  }
 
   bool isDarkMode(BuildContext context) {
     return Theme.of(context).brightness == Brightness.dark;
@@ -45,6 +19,15 @@ class _CartState extends State<Cart> {
   @override
   Widget build(BuildContext context) {
     bool darkMode = isDarkMode(context);
+
+    void _loadData(){
+      Provider.of<CartProvider>(context, listen: false).setCart();
+    }
+
+    final cartProvider = Provider.of<CartProvider>(context);
+    final cartItems = cartProvider.cartItems;
+    final cart = cartProvider.cart;
+    final discount = cartProvider.discount;
 
     return Scaffold(
       backgroundColor: darkMode ? AppColors.darkbg : AppColors.lightbg,

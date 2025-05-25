@@ -9,6 +9,7 @@ import 'package:queens/components/textField.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import '../components/alert_dialog.dart';
 import '../database/userData.dart';
+import '../provider/cartProvider.dart';
 import '../provider/userProvider.dart';
 
 class Login extends StatefulWidget {
@@ -60,6 +61,7 @@ class _LoginState extends State<Login> {
       UserModel _user=UserModel(name: data?['name'], image: data?['imageUrl'], gender: data?['gender'], phone: data?['phoneNumber']);
       userValue.setUser(_user);
       // ending
+      Provider.of<CartProvider>(context, listen: false).setCart();
 
     } on FirebaseAuthException catch (e) {
       Navigator.pop(context);
