@@ -40,7 +40,9 @@ class _CategoriepageState extends State<Categoriepage> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    final currentCategory = Provider.of<CategoryProvider>(context).currentCategory;
+    final currentCategory = Provider
+        .of<CategoryProvider>(context)
+        .currentCategory;
     items = menu.getMenuByCategory(currentCategory);
     filteredItems = List.from(items);
   }
@@ -52,12 +54,16 @@ class _CategoriepageState extends State<Categoriepage> {
   }
 
   bool isDarkMode(BuildContext context) {
-    return Theme.of(context).brightness == Brightness.dark;
+    return Theme
+        .of(context)
+        .brightness == Brightness.dark;
   }
 
   @override
   Widget build(BuildContext context) {
-    final currentCategory = Provider.of<CategoryProvider>(context).currentCategory;
+    final currentCategory = Provider
+        .of<CategoryProvider>(context)
+        .currentCategory;
     bool darkMode = isDarkMode(context);
 
     return Scaffold(
@@ -89,7 +95,23 @@ class _CategoriepageState extends State<Categoriepage> {
                   darkMode: darkMode,
                 ),
                 SizedBox(height: 2.h),
-                GridView.count(
+
+                // 👇 Show message if no items are found
+                filteredItems.isEmpty
+                    ? Center(
+                  child: Padding(
+                    padding: EdgeInsets.only(top: 10.h),
+                    child: Text(
+                      "No items found",
+                      style: TextStyle(
+                        fontSize: 17.sp,
+                        fontWeight: FontWeight.w500,
+                        color: darkMode ? Colors.white70 : Colors.black54,
+                      ),
+                    ),
+                  ),
+                )
+                    : GridView.count(
                   crossAxisCount: 2,
                   crossAxisSpacing: 3.w,
                   mainAxisSpacing: 2.h,
