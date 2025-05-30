@@ -38,6 +38,7 @@ class Order {
     return orderId;
   }
 
+  /// track order by order id
   Future<Map<String, dynamic>?> trackOrder({
     required String orderId,
   }) async {
@@ -56,5 +57,19 @@ class Order {
       return null; // Order not found
     }
   }
+
+  /// get all orders
+  Future<List<Map<String, dynamic>>> getAllOrders() async {
+    final uid = FirebaseAuth.instance.currentUser!.uid;
+    final ordersRef = _firestore.collection('users').doc(uid).collection('orders');
+
+    final querySnapshot = await ordersRef.orderBy('orderTime', descending: true).get();
+
+    return querySnapshot.docs.map((doc) => doc.data()).toList();
+  }
+
+  /// for calling this function
+  // final orderService = Order();
+  // List<Map<String, dynamic>> orders = await orderService.getAllOrders();
 
 }
