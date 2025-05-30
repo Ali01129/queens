@@ -36,4 +36,14 @@ class CartData {
     return querySnapshot.docs.map((doc) => doc.data()).toList();
   }
 
+  // 5. Clear all items from the cart
+  Future<void> clearCart({required String userId}) async {
+    final cartRef = _firestore.collection('users').doc(userId).collection('cart');
+    final cartItems = await cartRef.get();
+    for (var doc in cartItems.docs) {
+      await doc.reference.delete();
+    }
+  }
+
+
 }

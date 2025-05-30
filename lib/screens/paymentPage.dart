@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:queens/components/addressPage/addButton.dart';
 import 'package:queens/components/backButton.dart';
+import 'package:queens/database/order.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
 import '../components/addressPage/addressTile.dart';
 import '../components/cart/bill.dart';
 import '../components/cart/cartButton.dart';
 import '../components/colors/appColor.dart';
+import '../provider/cartProvider.dart';
+import '../provider/orderProvider.dart';
 
 class Paymentpage extends StatefulWidget {
   const Paymentpage({super.key});
@@ -20,7 +24,7 @@ class _PaymentpageState extends State<Paymentpage> {
     return Theme.of(context).brightness == Brightness.dark;
   }
 
-  int? selectedIndex;
+  int? selectedIndex=-1;
 
   List<Map<String, dynamic>> address = [
     {
@@ -30,7 +34,7 @@ class _PaymentpageState extends State<Paymentpage> {
     },
     {
       'title': 'Card Payment',
-      'subtitle': 'Card on Delivery',
+      'subtitle': 'Card',
       'icon':'assets/card.png'
     },
   ];
@@ -38,6 +42,27 @@ class _PaymentpageState extends State<Paymentpage> {
   @override
   Widget build(BuildContext context) {
     bool darkMode = isDarkMode(context);
+    final cartProvider = Provider.of<CartProvider>(context);
+    final cart = cartProvider.cart;
+    final discount = cartProvider.discount;
+
+    /// order provider
+    final orderProvider = Provider.of<OrderProvider>(context);
+
+    void onTap()async{
+      if(selectedIndex!=-1){
+        orderProvider.setPayment(address[selectedIndex!]['title'], 'Pending');
+        String orderId = await orderProvider.add_to_Database();
+        orderProvider.clearOrder();
+        cartProvider.clearCart();
+        print(orderId);
+        /// track order
+        // final order=await Order().trackOrder(orderId: orderId);
+        // print(order);
+        Navigator.pushNamed(context, '/bottom');
+      }
+    }
+
     return Scaffold(
       backgroundColor: darkMode ? AppColors.darkbg : AppColors.lightbg,
       body: SafeArea(
@@ -93,15 +118,13 @@ class _PaymentpageState extends State<Paymentpage> {
                   },
                 ),
               ),
-              Bill(darkMode: darkMode, cartTotal: 0.0, discount: 0.0, total: 0.0),
+              Bill(darkMode: darkMode, cartTotal: cart, discount: discount, total: cart-discount),
               SizedBox(height: 2.h),
               Center(
                 child: Cartbutton(
                   darkMode: darkMode,
                   title: "NEXT",
-                  onTapCallback: () {
-                    Navigator.pushNamed(context, '/addressPage');
-                  },
+                  onTapCallback: onTap,
                 ),
               ),
             ],

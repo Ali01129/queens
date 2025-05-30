@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:queens/components/addressPage/addButton.dart';
 import 'package:queens/components/backButton.dart';
+import 'package:queens/provider/orderProvider.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
-
 import '../components/addressPage/addressTile.dart';
 import '../components/cart/bill.dart';
 import '../components/cart/cartButton.dart';
 import '../components/colors/appColor.dart';
+import '../provider/cartProvider.dart';
 
 class Addresspage extends StatefulWidget {
   const Addresspage({super.key});
@@ -16,11 +18,12 @@ class Addresspage extends StatefulWidget {
 }
 
 class _AddresspageState extends State<Addresspage> {
+
   bool isDarkMode(BuildContext context) {
     return Theme.of(context).brightness == Brightness.dark;
   }
 
-  int? selectedIndex;
+  int? selectedIndex=-1;
 
   List<Map<String, dynamic>> address = [
     {
@@ -36,6 +39,23 @@ class _AddresspageState extends State<Addresspage> {
   @override
   Widget build(BuildContext context) {
     bool darkMode = isDarkMode(context);
+
+    /// cart provider
+    final cartProvider = Provider.of<CartProvider>(context);
+    final cart = cartProvider.cart;
+    final discount = cartProvider.discount;
+    final cartItems = cartProvider.cartItems;
+
+    /// order provider
+    final orderProvider = Provider.of<OrderProvider>(context);
+
+    void onTap(){
+      if(selectedIndex!=-1) {
+        orderProvider.initializeOrder(cartItems: cartItems,discount: discount,total: cart-discount,locationName: address[selectedIndex!]['title'],locationDetails: address[selectedIndex!]['subtitle']);
+        Navigator.pushNamed(context, '/paymentPage');
+      }
+    }
+
     return Scaffold(
       backgroundColor: darkMode ? AppColors.darkbg : AppColors.lightbg,
       body: SafeArea(
@@ -91,15 +111,13 @@ class _AddresspageState extends State<Addresspage> {
                   },
                 ),
               ),
-              Bill(darkMode: darkMode, cartTotal: 0.0, discount: 0.0, total: 0.0),
+              Bill(darkMode: darkMode, cartTotal: cart, discount: discount, total: cart-discount),
               SizedBox(height: 2.h),
               Center(
                 child: Cartbutton(
                   darkMode: darkMode,
                   title: "NEXT",
-                  onTapCallback: () {
-                    Navigator.pushNamed(context, '/paymentPage');
-                  },
+                  onTapCallback: onTap,
                 ),
               ),
             ],
