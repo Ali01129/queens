@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:queens/components/home/menuItem.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
+import '../../database/menu.dart';
+
 class Popular extends StatelessWidget {
   final bool darkMode;
   const Popular({super.key, required this.darkMode});
@@ -9,43 +11,8 @@ class Popular extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // Sample menu items list
-    final List<Map<String, dynamic>> menuItems = [
-      {
-        "name": "Chicken Burger",
-        "image": "assets/burger.png",
-        "price": 20,
-        "calories": 500,
-        "rating": 4.0
-      },
-      {
-        "name": "Chicken Pie",
-        "image": "assets/pie.png",
-        "price": 18,
-        "calories": 450,
-        "rating": 4.5
-      },
-      {
-        "name": "Beef Pepperoni",
-        "image": "assets/pizza.png",
-        "price": 50,
-        "calories": 550,
-        "rating": 4.0
-      },
-      {
-        "name": "Veggie Wrap",
-        "image": "assets/wrap.png",
-        "price": 60,
-        "calories": 300,
-        "rating": 4.2
-      },
-      {
-        "name": "Fish & chips",
-        "image": "assets/fish.png",
-        "price": 60,
-        "calories": 300,
-        "rating": 4.2
-      },
-    ];
+    final menu = Menu();
+    final menuItems = menu.getAllMenu();
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
