@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:queens/components/button.dart';
+import 'package:queens/components/order/trackDetails.dart';
 import 'package:queens/components/textField.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import '../components/backButton.dart';
@@ -16,6 +17,7 @@ class Trackorder extends StatefulWidget {
 class _TrackorderState extends State<Trackorder> {
   late TextEditingController trackController;
   FocusNode trackFocusNode = FocusNode();
+  Map<String, dynamic>? order;
 
   @override
   void initState() {
@@ -33,20 +35,22 @@ class _TrackorderState extends State<Trackorder> {
     return Theme.of(context).brightness == Brightness.dark;
   }
 
-  @override
-  Widget build(BuildContext context) {
-
-    bool darkMode = isDarkMode(context);
-
-    void onTap()async{
-      if (trackController.text.isNotEmpty) {
-        final order=await Order().trackOrder(orderId: trackController.text);
-        print(order);
-        if(order==null){
-          print('order not found');
-        }
+  void onTap() async {
+    if (trackController.text.isNotEmpty) {
+      final result = await Order().trackOrder(orderId: trackController.text);
+      if (result == null) {
+        print('Order not found');
+      } else {
+        setState(() {
+          order = result;
+        });
       }
     }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    bool darkMode = isDarkMode(context);
 
     return Scaffold(
       backgroundColor: darkMode ? AppColors.darkbg : AppColors.lightbg,
@@ -71,9 +75,22 @@ class _TrackorderState extends State<Trackorder> {
                   ],
                 ),
                 SizedBox(height: 3.h),
-                CustomTextfield(controller: trackController, focusNode: trackFocusNode, hintText: "Enter Order Number"),
+                CustomTextfield(
+                  controller: trackController,
+                  focusNode: trackFocusNode,
+                  hintText: "Enter Order Number",
+                ),
                 SizedBox(height: 2.h),
-                Button(title: 'Track Order', textColor: Colors.white, bg: AppColors.buttonPrimary, onTapCallback: onTap),
+                Button(
+                  title: 'Track Order',
+                  textColor: Colors.white,
+                  bg: AppColors.buttonPrimary,
+                  onTapCallback: onTap,
+                ),
+                if (order != null) ...[
+                  SizedBox(height: 2.h),
+                  TrackDetails(order: order!, darkMode: darkMode,),
+                ]
               ],
             ),
           ),
