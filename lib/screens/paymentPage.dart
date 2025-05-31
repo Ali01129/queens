@@ -9,6 +9,7 @@ import '../components/addressPage/addressTile.dart';
 import '../components/cart/bill.dart';
 import '../components/cart/cartButton.dart';
 import '../components/colors/appColor.dart';
+import '../components/order/showOrderPlacedBottomSheet.dart';
 import '../provider/cartProvider.dart';
 import '../provider/orderProvider.dart';
 
@@ -55,11 +56,15 @@ class _PaymentpageState extends State<Paymentpage> {
         String orderId = await orderProvider.add_to_Database();
         orderProvider.clearOrder();
         cartProvider.clearCart();
-        print(orderId);
-        /// track order
-        // final order=await Order().trackOrder(orderId: orderId);
-        // print(order);
-        Navigator.pushNamed(context, '/bottom');
+        ///show bottom sheet
+        showOrderPlacedBottomSheet(
+          context,
+          darkMode: darkMode,
+          orderId: orderId,
+          onHomePressed: () {
+            Navigator.pushReplacementNamed(context, '/bottom');
+          },
+        );
       }
     }
 

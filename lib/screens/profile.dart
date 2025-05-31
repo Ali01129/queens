@@ -97,7 +97,9 @@ class Profile extends StatelessWidget {
                   darkMode: darkMode,
                   name: 'Track Order',
                   icon: Icon(Icons.local_shipping, color: AppColors.containerText),
-                  onTapCallback: () {},
+                  onTapCallback: () {
+                    Navigator.pushNamed(context, '/trackOrder');
+                  },
                 ),
                 SizedBox(height: 1.h),
                 Profiletile(

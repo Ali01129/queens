@@ -11,6 +11,7 @@ import 'package:queens/screens/login.dart';
 import 'package:queens/screens/onboarding.dart';
 import 'package:queens/screens/paymentPage.dart';
 import 'package:queens/screens/register.dart';
+import 'package:queens/screens/trackOrder.dart';
 import 'package:queens/screens/uploadPhoto.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:queens/screens/splashScreen.dart';
@@ -67,6 +68,7 @@ class MyApp extends StatelessWidget {
             '/addressPage':(context)=>Addresspage(),
             '/paymentPage':(context)=>Paymentpage(),
             '/categoriePage':(context)=>Categoriepage(),
+            '/trackOrder':(context)=>Trackorder(),
           },
           themeMode: ThemeMode.system,
           theme: ThemeData.light(),
