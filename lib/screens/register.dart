@@ -3,7 +3,6 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:queens/components/auth/others.dart';
 import 'package:queens/components/button.dart';
-import 'package:queens/components/checkBox.dart';
 import 'package:queens/components/textField.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
@@ -181,8 +180,6 @@ class _RegisterState extends State<Register> {
                   hintText: "Re-enter your password",
                   isPassword: true,
                 ),
-                SizedBox(height: 1.h),
-                CustomCheckbox(),
                 SizedBox(height: 3.h),
                 Button(
                   title: "SIGN UP",

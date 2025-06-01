@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:queens/components/auth/others.dart';
 import 'package:queens/components/button.dart';
-import 'package:queens/components/checkBox.dart';
 import 'package:queens/components/textField.dart';
 import 'package:queens/provider/myOrdresProvider.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
@@ -150,8 +149,6 @@ class _LoginState extends State<Login> {
                   hintText: "Enter your password",
                   isPassword: true,
                 ),
-                SizedBox(height: 1.h,),
-                CustomCheckbox(),
                 SizedBox(height: 3.h,),
                 Button(title: "SIGN IN", textColor: Colors.white, bg: Color(0xFF0d5ef9), onTapCallback: login),
                 SizedBox(height: 3.h,),
