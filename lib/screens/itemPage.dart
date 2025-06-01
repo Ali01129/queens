@@ -49,7 +49,7 @@ class Itempage extends StatelessWidget {
                           height: 40.h,
                           child: Image.asset(
                             args.image,
-                            fit: BoxFit.cover,
+                            fit: BoxFit.contain,
                           ),
                         ),
                         Positioned(

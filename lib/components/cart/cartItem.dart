@@ -83,7 +83,7 @@ class Cartitem extends StatelessWidget {
                 image,
                 width: 20.w,
                 height: 20.w,
-                fit: BoxFit.cover,
+                fit: BoxFit.contain,
               ),
             ),
             SizedBox(width: 4.w),
