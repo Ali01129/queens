@@ -6,6 +6,7 @@ import 'package:queens/components/auth/others.dart';
 import 'package:queens/components/button.dart';
 import 'package:queens/components/checkBox.dart';
 import 'package:queens/components/textField.dart';
+import 'package:queens/provider/myOrdresProvider.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import '../components/alert_dialog.dart';
 import '../database/userData.dart';
@@ -60,13 +61,14 @@ class _LoginState extends State<Login> {
         MaterialPageRoute(builder: (context) => Bottom()),
       );
 
-      // adding data in provider
+      /// adding data in provider
       final userValue = Provider.of<UserProvider>(context, listen: false);
       final data = await UserData().getUserData();
       UserModel _user=UserModel(name: data?['name'], image: data?['imageUrl'], gender: data?['gender'], phone: data?['phoneNumber']);
       userValue.setUser(_user);
-      // ending
+      /// ending
       Provider.of<CartProvider>(context, listen: false).setCart();
+      Provider.of<Myordresprovider>(context,listen:false).setMyOrders();
 
     } on FirebaseAuthException catch (e) {
       Navigator.pop(context);

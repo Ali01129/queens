@@ -11,6 +11,7 @@ import '../components/cart/cartButton.dart';
 import '../components/colors/appColor.dart';
 import '../components/order/showOrderPlacedBottomSheet.dart';
 import '../provider/cartProvider.dart';
+import '../provider/myOrdresProvider.dart';
 import '../provider/orderProvider.dart';
 
 class Paymentpage extends StatefulWidget {
@@ -56,6 +57,7 @@ class _PaymentpageState extends State<Paymentpage> {
         String orderId = await orderProvider.add_to_Database();
         orderProvider.clearOrder();
         cartProvider.clearCart();
+        Provider.of<Myordresprovider>(context,listen:false).setMyOrders();
         ///show bottom sheet
         showOrderPlacedBottomSheet(
           context,

@@ -6,6 +6,7 @@ import 'package:queens/navigation/bottom.dart';
 import 'package:queens/screens/login.dart';
 
 import '../provider/cartProvider.dart';
+import '../provider/myOrdresProvider.dart';
 import '../provider/userProvider.dart';
 
 class AuthGate extends StatelessWidget {
@@ -22,6 +23,7 @@ class AuthGate extends StatelessWidget {
       );
       Provider.of<UserProvider>(context, listen: false).setUser(userModel);
       Provider.of<CartProvider>(context, listen: false).setCart();
+      Provider.of<Myordresprovider>(context,listen:false).setMyOrders();
     }
   }
 

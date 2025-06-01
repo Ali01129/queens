@@ -6,6 +6,7 @@ import 'package:queens/components/profile/profileTile.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import '../components/bottomSheet.dart';
 import '../provider/cartProvider.dart';
+import '../provider/myOrdresProvider.dart';
 import '../provider/userProvider.dart';
 import 'login.dart';
 
@@ -13,13 +14,15 @@ class Profile extends StatelessWidget {
   const Profile({super.key});
 
   void _signOut(BuildContext context) async {
-    await FirebaseAuth.instance.signOut();
-
-    // Clear provider states (optional but recommended)
+    /// Clear provider states (optional but recommended)
     Provider.of<UserProvider>(context, listen: false).clearUser();
     Provider.of<CartProvider>(context, listen: false).clearCart();
+    Provider.of<Myordresprovider>(context,listen:false).clearMyOrder();
 
-    // Navigate to Login screen and clear all previous routes
+    /// sining out
+    await FirebaseAuth.instance.signOut();
+
+    /// Navigate to Login screen and clear all previous routes
     Navigator.pushAndRemoveUntil(
       context,
       MaterialPageRoute(builder: (context) => const Login()),
@@ -90,7 +93,9 @@ class Profile extends StatelessWidget {
                   darkMode: darkMode,
                   name: 'My Orders',
                   icon: Icon(Icons.shopping_bag, color: AppColors.containerText),
-                  onTapCallback: () {},
+                  onTapCallback: () {
+                    Navigator.pushNamed(context, '/myOrders');
+                  },
                 ),
                 SizedBox(height: 1.h),
                 Profiletile(

@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:queens/components/order/myOrders.dart';
 import 'package:queens/components/home/categoriePage.dart';
 import 'package:queens/database/authGate.dart';
 import 'package:queens/navigation/bottom.dart';
 import 'package:queens/provider/categorieProvider.dart';
+import 'package:queens/provider/myOrdresProvider.dart';
 import 'package:queens/provider/orderProvider.dart';
 import 'package:queens/screens/addressPage.dart';
 import 'package:queens/screens/bio.dart';
@@ -39,6 +41,7 @@ void main() async{
           ChangeNotifierProvider(create: (context)=>CartProvider()),
           ChangeNotifierProvider(create: (_) => CategoryProvider()),
           ChangeNotifierProvider(create: (context)=>OrderProvider()),
+          ChangeNotifierProvider(create: (context)=>Myordresprovider()),
         ],
         child: MyApp() ,
       ),
@@ -69,6 +72,7 @@ class MyApp extends StatelessWidget {
             '/paymentPage':(context)=>Paymentpage(),
             '/categoriePage':(context)=>Categoriepage(),
             '/trackOrder':(context)=>Trackorder(),
+            '/myOrders':(context)=>Myorders(),
           },
           themeMode: ThemeMode.system,
           theme: ThemeData.light(),
