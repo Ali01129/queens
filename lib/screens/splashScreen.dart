@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:responsive_sizer/responsive_sizer.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -31,16 +30,9 @@ class _SplashScreenState extends State<SplashScreen> {
         decoration: BoxDecoration(
           image: DecorationImage(
             image: AssetImage(
-              darkMode ? 'assets/bg_dark.png' : 'assets/bg_light.png',
+              darkMode ? 'assets/d.jpg' : 'assets/l.jpg',
             ),
             fit: BoxFit.cover,
-          ),
-        ),
-        child: Center(
-          child: Image.asset(
-            darkMode ? 'assets/logo-dark.png' : 'assets/logo-light.png',
-            width: 60.w,
-            fit: BoxFit.contain,
           ),
         ),
       ),
