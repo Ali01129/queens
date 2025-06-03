@@ -118,13 +118,6 @@ class Profile extends StatelessWidget {
                 SizedBox(height: 1.h),
                 Profiletile(
                   darkMode: darkMode,
-                  name: 'My Favorites',
-                  icon: Icon(Icons.favorite, color: AppColors.containerText),
-                  onTapCallback: () {},
-                ),
-                SizedBox(height: 1.h),
-                Profiletile(
-                  darkMode: darkMode,
                   name: 'App Settings',
                   icon: Icon(Icons.settings, color: AppColors.containerText),
                   onTapCallback: () {},
