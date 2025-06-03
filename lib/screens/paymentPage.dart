@@ -51,7 +51,7 @@ class _PaymentpageState extends State<Paymentpage> {
     final orderProvider = Provider.of<OrderProvider>(context);
 
     void onTap()async{
-      if(selectedIndex!=-1){
+      if(selectedIndex!=-1 && selectedIndex!=1){
         orderProvider.setPayment(address[selectedIndex!]['title'], 'Pending');
         String orderId = await orderProvider.add_to_Database();
         orderProvider.clearOrder();
