@@ -11,14 +11,18 @@ class UserData {
   }) async {
     final uid = FirebaseAuth.instance.currentUser!.uid;
     final firestore = FirebaseFirestore.instance;
-    await firestore.collection('users').doc(uid).set({
-      'name': name,
-      'gender': gender,
-      'phoneNumber': phoneNumber,
-      'dateOfBirth': dateOfBirth,
-      'uid': uid,
-      'createdAt': FieldValue.serverTimestamp(),
-    });
+    User? user = FirebaseAuth.instance.currentUser;
+    if (user != null) {
+      await firestore.collection('users').doc(uid).set({
+        'name': name,
+        'gender': gender,
+        'phoneNumber': phoneNumber,
+        'dateOfBirth': dateOfBirth,
+        'uid': uid,
+        'email': user.email,
+        'createdAt': FieldValue.serverTimestamp(),
+      });
+    }
   }
 
   // Method to retrieve user data
