@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:queens/screens/cart.dart';
 import 'package:queens/screens/home.dart';
+import 'package:queens/screens/messaging.dart';
 import 'package:queens/screens/profile.dart';
 
 class Bottom extends StatefulWidget {
@@ -14,7 +15,7 @@ class _BottomState extends State<Bottom> {
   final List<Widget> _pages = [
     Home(),
     Cart(),
-    Center(child: Text('Messages')),
+    Messaging(),
     Profile(),
   ];
 
