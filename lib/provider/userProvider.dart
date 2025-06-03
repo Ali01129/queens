@@ -6,8 +6,9 @@ class UserModel {
   final String image;
   final String gender;
   final String phone;
+  final String email;
 
-  UserModel({required this.name, required this.image,required this.gender,required this.phone});
+  UserModel({required this.name, required this.image,required this.gender,required this.phone,required this.email});
 }
 
 // user provider

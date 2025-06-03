@@ -20,6 +20,7 @@ class AuthGate extends StatelessWidget {
         image: data['imageUrl'],
         gender: data['gender'],
         phone: data['phoneNumber'],
+        email:data['email'],
       );
       Provider.of<UserProvider>(context, listen: false).setUser(userModel);
       Provider.of<CartProvider>(context, listen: false).setCart();

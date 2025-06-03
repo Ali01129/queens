@@ -79,6 +79,15 @@ class Profile extends StatelessWidget {
                       ),
                     ),
                   ),
+                  Center(
+                    child: Text(
+                      user.email,
+                      style: TextStyle(
+                        fontSize: 16.sp,
+                        color: AppColors.containerText
+                      ),
+                    ),
+                  ),
                 ] else
                   Center(child: CircularProgressIndicator()),
                 SizedBox(height: 6.h),
