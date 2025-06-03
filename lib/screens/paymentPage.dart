@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:queens/components/addressPage/addButton.dart';
 import 'package:queens/components/backButton.dart';
-import 'package:queens/database/order.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
 import '../components/addressPage/addressTile.dart';
@@ -36,7 +35,7 @@ class _PaymentpageState extends State<Paymentpage> {
     },
     {
       'title': 'Card Payment',
-      'subtitle': 'Card',
+      'subtitle': 'Comming Soon',
       'icon':'assets/card.png'
     },
   ];

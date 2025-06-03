@@ -6,7 +6,6 @@ import 'package:queens/components/cart/cartButton.dart';
 import 'package:queens/components/cart/cartItem.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import '../components/colors/appColor.dart';
-import '../database/cartData.dart';
 import '../provider/cartProvider.dart';
 
 class Cart extends StatelessWidget {
@@ -64,7 +63,9 @@ class Cart extends StatelessWidget {
               SizedBox(height: 2.h,),
               Center(
                 child: Cartbutton(darkMode: darkMode, title: "PLACE MY ORDER", onTapCallback: (){
-                  Navigator.pushNamed(context, '/addressPage');
+                  if(!cartItems.isEmpty) {
+                    Navigator.pushNamed(context, '/addressPage');
+                  }
                 }),
               ),
             ],
