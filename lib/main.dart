@@ -16,7 +16,6 @@ import 'package:queens/screens/register.dart';
 import 'package:queens/screens/trackOrder.dart';
 import 'package:queens/screens/uploadPhoto.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
-import 'package:queens/screens/splashScreen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'firebase_options.dart';
@@ -59,10 +58,9 @@ class MyApp extends StatelessWidget {
           debugShowCheckedModeBanner: false,
           initialRoute: '/',
           routes: {
-            '/': (context) => const SplashScreen(),
+            '/':(context)=>const Onboarding(),
             '/login':(context)=>const Login(),
             '/register':(context)=>const Register(),
-            '/onboarding':(context)=>const Onboarding(),
             '/uploadPhoto':(context)=>const Uploadphoto(),
             '/bio':(context)=>const Bio(),
             '/bottom':(context)=> Bottom(),

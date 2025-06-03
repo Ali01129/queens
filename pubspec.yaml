@@ -44,6 +44,7 @@ dependencies:
   supabase_flutter: ^2.8.4
   provider: ^6.1.5
   flutter_slidable: ^3.1.2
+  flutter_native_splash: ^2.4.1
 
 dev_dependencies:
   flutter_test:
