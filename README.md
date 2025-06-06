@@ -1,5 +1,5 @@
 # queens
 
-queens girll and fish bar
+Queens Girl and Fish Bar
 
 app coming soon on play store and app store
