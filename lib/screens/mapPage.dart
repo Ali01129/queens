@@ -1,21 +1,70 @@
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:responsive_sizer/responsive_sizer.dart';
+import 'package:location/location.dart';
 
-class MapPage extends StatelessWidget {
+class MapPage extends StatefulWidget {
   const MapPage({super.key});
 
-  static const LatLng map = LatLng(37.4223, -122.0848);
-  static const LatLng map2 = LatLng(37.3346, -122.0090);
+  @override
+  State<MapPage> createState() => _MapPageState();
+}
+
+class _MapPageState extends State<MapPage> {
+  LatLng? _currentPos;
+  Location _locationController = Location();
+  GoogleMapController? _mapController;
+
+  @override
+  void initState() {
+    super.initState();
+    getLocationUpdates();
+  }
+
+  void getLocationUpdates() async {
+    bool serviceEnabled = await _locationController.serviceEnabled();
+    if (!serviceEnabled) {
+      serviceEnabled = await _locationController.requestService();
+      if (!serviceEnabled) return;
+    }
+
+    PermissionStatus permissionGranted = await _locationController.hasPermission();
+    if (permissionGranted == PermissionStatus.denied) {
+      permissionGranted = await _locationController.requestPermission();
+      if (permissionGranted != PermissionStatus.granted) return;
+    }
+
+    _locationController.onLocationChanged.listen((LocationData currentLocation) {
+      if (currentLocation.latitude != null && currentLocation.longitude != null) {
+        final updatedPosition = LatLng(currentLocation.latitude!, currentLocation.longitude!);
+        setState(() {
+          _currentPos = updatedPosition;
+        });
+
+        // Move camera to new location
+        if (_mapController != null) {
+          _mapController!.animateCamera(CameraUpdate.newLatLng(_currentPos!));
+        }
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: GoogleMap(
-        initialCameraPosition: CameraPosition(target: map, zoom: 13),
+      body: _currentPos == null
+          ? Center(child: CircularProgressIndicator())
+          : GoogleMap(
+        initialCameraPosition: CameraPosition(
+          target: _currentPos!,
+          zoom: 15,
+        ),
+        onMapCreated: (controller) => _mapController = controller,
         markers: {
-          Marker(markerId: MarkerId("_currentLocation"),icon: BitmapDescriptor.defaultMarker, position: map),
-          Marker(markerId: MarkerId("_sourceLocation"),icon: BitmapDescriptor.defaultMarker, position: map2)
+          Marker(
+            markerId: MarkerId("currentLocation"),
+            position: _currentPos!,
+            icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueAzure),
+          )
         },
       ),
     );
