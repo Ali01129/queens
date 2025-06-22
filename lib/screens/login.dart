@@ -31,14 +31,6 @@ class _LoginState extends State<Login> {
     return Theme.of(context).brightness == Brightness.dark;
   }
 
-  bool _validateEmail(String email) {
-    final emailRegex = RegExp(r"^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$");
-    return emailRegex.hasMatch(email);
-  }
-  bool _validatePassword(String password) {
-    return password.length >= 6;
-  }
-
   void login() async {
     // Show loading dialog
     showDialog(
