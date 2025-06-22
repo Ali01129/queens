@@ -5,7 +5,6 @@ import 'package:queens/components/home/horizontalScroll.dart';
 import 'package:queens/components/home/notification.dart';
 import 'package:queens/components/home/popular.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
-
 import '../components/home/searchBar.dart';
 
 class Home extends StatelessWidget {

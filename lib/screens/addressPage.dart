@@ -105,7 +105,9 @@ class _AddresspageState extends State<Addresspage> {
                       return Addbutton(
                         darkMode: darkMode,
                         title: "Add Location +",
-                        onTapCallback: () {},
+                        onTapCallback: () {
+                          Navigator.pushNamed(context, '/mapPage');
+                        },
                       );
                     }
                   },
