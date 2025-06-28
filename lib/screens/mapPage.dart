@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:location/location.dart';
+import 'package:queens/components/backButton.dart';
+import 'package:queens/components/button.dart';
+import 'package:queens/components/colors/appColor.dart';
 
 class MapPage extends StatefulWidget {
   const MapPage({super.key});
@@ -10,8 +13,9 @@ class MapPage extends StatefulWidget {
 }
 
 class _MapPageState extends State<MapPage> {
+
   LatLng? _currentPos;
-  Location _locationController = Location();
+  final Location _locationController = Location();
   GoogleMapController? _mapController;
 
   @override
@@ -48,24 +52,63 @@ class _MapPageState extends State<MapPage> {
     });
   }
 
+  void _goToCurrentLocation() {
+    if (_mapController != null && _currentPos != null) {
+      _mapController!.animateCamera(CameraUpdate.newLatLng(_currentPos!));
+    }
+  }
+
+  bool isDarkMode(BuildContext context) {
+    return Theme.of(context).brightness == Brightness.dark;
+  }
+
   @override
   Widget build(BuildContext context) {
+    bool darkMode = isDarkMode(context);
     return Scaffold(
       body: _currentPos == null
-          ? Center(child: CircularProgressIndicator())
-          : GoogleMap(
-        initialCameraPosition: CameraPosition(
-          target: _currentPos!,
-          zoom: 15,
-        ),
-        onMapCreated: (controller) => _mapController = controller,
-        markers: {
-          Marker(
-            markerId: MarkerId("currentLocation"),
-            position: _currentPos!,
-            icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueAzure),
-          )
-        },
+          ? const Center(child: CircularProgressIndicator())
+          : Stack(
+        children: [
+          GoogleMap(
+            initialCameraPosition: CameraPosition(
+              target: _currentPos!,
+              zoom: 15,
+            ),
+            onMapCreated: (controller) => _mapController = controller,
+            markers: {
+              Marker(
+                markerId: const MarkerId("currentLocation"),
+                position: _currentPos!,
+                icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueAzure),
+              )
+            },
+            myLocationEnabled: true,
+            myLocationButtonEnabled: false, // We'll use custom button
+          ),
+          // Back Button (top-left)
+          Positioned(
+            top: 50,
+            left: 10,
+            child: BackButtonWidget(darkMode: false)
+          ),
+          // Location Button (bottom-center)
+          Positioned(
+            bottom: 30,
+            left: MediaQuery.of(context).size.width / 2 - 75, // Assuming button width = 150
+            child: SizedBox(
+              width: 150, // Optional: fix width for centering
+              child: Button(
+                title: "Add Location",
+                textColor: AppColors.lightbg,
+                bg: AppColors.buttonPrimary,
+                onTapCallback: () {
+                  // Your callback logic
+                },
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }
