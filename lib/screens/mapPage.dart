@@ -95,11 +95,11 @@ class _MapPageState extends State<MapPage> {
           // Location Button (bottom-center)
           Positioned(
             bottom: 30,
-            left: MediaQuery.of(context).size.width / 2 - 75, // Assuming button width = 150
+            left: MediaQuery.of(context).size.width / 2 - 100, // Assuming button width = 150
             child: SizedBox(
-              width: 150, // Optional: fix width for centering
+              width: 200, // Optional: fix width for centering
               child: Button(
-                title: "Add Location",
+                title: "Add to Location",
                 textColor: AppColors.lightbg,
                 bg: AppColors.buttonPrimary,
                 onTapCallback: () {
