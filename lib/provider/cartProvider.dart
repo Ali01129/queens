@@ -25,9 +25,6 @@ class CartProvider extends ChangeNotifier {
   }
 
   void clearCart() {
-    final cartData = CartData();
-    final uid = FirebaseAuth.instance.currentUser!.uid;
-    cartData.clearCart(userId: uid);
     cartItems = [];
     cart=0.0;
     discount=0.0;
