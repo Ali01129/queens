@@ -2,8 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:location/location.dart';
 import 'package:queens/components/backButton.dart';
+import 'package:queens/components/bottomSheet.dart';
 import 'package:queens/components/button.dart';
 import 'package:queens/components/colors/appColor.dart';
+
+import '../components/addressPage/addressBottomSheet.dart';
 
 class MapPage extends StatefulWidget {
   const MapPage({super.key});
@@ -17,6 +20,8 @@ class _MapPageState extends State<MapPage> {
   LatLng? _currentPos;
   final Location _locationController = Location();
   GoogleMapController? _mapController;
+
+  final TextEditingController locationController = TextEditingController();
 
   @override
   void initState() {
@@ -103,6 +108,18 @@ class _MapPageState extends State<MapPage> {
                 textColor: AppColors.lightbg,
                 bg: AppColors.buttonPrimary,
                 onTapCallback: () {
+                  showAddLocationBottomSheet(
+                    context,
+                    darkMode: darkMode,
+                    controller: locationController,
+                    onAdd: () {
+                      final locationName = locationController.text;
+                      print("Location added: $locationName");
+                      print('Current location: ${_currentPos!.latitude}, ${_currentPos!.longitude}');
+
+                      locationController.clear();
+                    },
+                  );
                   // Your callback logic
                 },
               ),

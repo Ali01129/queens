@@ -44,6 +44,4 @@ class CartData {
       await doc.reference.delete();
     }
   }
-
-
 }
