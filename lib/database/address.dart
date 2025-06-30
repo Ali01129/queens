@@ -1,16 +1,17 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
-class LocationData {
+class AddressData {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
   // 1. Add location (with name and coordinates), ensuring name is unique
   Future<void> addLocation({
-    required String userId,
     required String locationName,
     required double latitude,
     required double longitude,
   }) async {
-    final locationRef = _firestore.collection('users').doc(userId).collection('locations');
+    final uid = FirebaseAuth.instance.currentUser!.uid;
+    final locationRef = _firestore.collection('users').doc(uid).collection('locations');
     final existingLocation = await locationRef.doc(locationName).get();
 
     if (existingLocation.exists) {
@@ -26,16 +27,18 @@ class LocationData {
   }
 
   // 2. Get all locations for a user
-  Future<List<Map<String, dynamic>>> getLocations({required String userId}) async {
-    final locationRef = _firestore.collection('users').doc(userId).collection('locations');
+  Future<List<Map<String, dynamic>>> getLocations() async {
+    final uid = FirebaseAuth.instance.currentUser!.uid;
+    final locationRef = _firestore.collection('users').doc(uid).collection('locations');
     final querySnapshot = await locationRef.get();
 
     return querySnapshot.docs.map((doc) => doc.data()).toList();
   }
 
   // 3. Delete location by name
-  Future<void> deleteLocation({required String userId, required String locationName}) async {
-    final locationDoc = _firestore.collection('users').doc(userId).collection('locations').doc(locationName);
+  Future<void> deleteLocation({required String locationName}) async {
+    final uid = FirebaseAuth.instance.currentUser!.uid;
+    final locationDoc = _firestore.collection('users').doc(uid).collection('locations').doc(locationName);
     await locationDoc.delete();
   }
 }

@@ -3,6 +3,7 @@ import 'package:queens/components/order/myOrders.dart';
 import 'package:queens/components/home/categoriePage.dart';
 import 'package:queens/database/authGate.dart';
 import 'package:queens/navigation/bottom.dart';
+import 'package:queens/provider/addressProvider.dart';
 import 'package:queens/provider/categorieProvider.dart';
 import 'package:queens/provider/myOrdresProvider.dart';
 import 'package:queens/provider/orderProvider.dart';
@@ -43,6 +44,7 @@ void main() async{
           ChangeNotifierProvider(create: (_) => CategoryProvider()),
           ChangeNotifierProvider(create: (context)=>OrderProvider()),
           ChangeNotifierProvider(create: (context)=>Myordresprovider()),
+          ChangeNotifierProvider(create: (context)=>AddressProvider()),
         ],
         child: MyApp() ,
       ),

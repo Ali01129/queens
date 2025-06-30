@@ -8,8 +8,8 @@ class AddressProvider extends ChangeNotifier {
   // Fetch and set addresses from Firebase
   Future<void> setAddresses() async {
     final uid = FirebaseAuth.instance.currentUser!.uid;
-    final locationData = LocationData();
-    final fetchedAddresses = await locationData.getLocations(userId: uid);
+    final locationData = AddressData();
+    final fetchedAddresses = await locationData.getLocations();
     addresses = fetchedAddresses;
     notifyListeners();
   }

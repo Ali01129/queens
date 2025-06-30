@@ -9,6 +9,7 @@ import '../components/cart/bill.dart';
 import '../components/cart/cartButton.dart';
 import '../components/colors/appColor.dart';
 import '../provider/cartProvider.dart';
+import '../provider/addressProvider.dart';
 
 class Addresspage extends StatefulWidget {
   const Addresspage({super.key});
@@ -18,41 +19,52 @@ class Addresspage extends StatefulWidget {
 }
 
 class _AddresspageState extends State<Addresspage> {
+  int? selectedIndex = -1;
+
+  @override
+  void initState() {
+    super.initState();
+    fetchAddresses();
+  }
+
+  void fetchAddresses() async {
+    await Provider.of<AddressProvider>(context, listen: false).setAddresses();
+  }
 
   bool isDarkMode(BuildContext context) {
     return Theme.of(context).brightness == Brightness.dark;
   }
 
-  int? selectedIndex=-1;
-
-  List<Map<String, dynamic>> address = [
-    {
-      'title': 'Home',
-      'subtitle': '123 Main Street, City, Country',
-    },
-    {
-      'title': 'Work',
-      'subtitle': '456 Office Blvd, City, Country',
-    },
-  ];
-
   @override
   Widget build(BuildContext context) {
     bool darkMode = isDarkMode(context);
 
-    /// cart provider
+    /// Providers
     final cartProvider = Provider.of<CartProvider>(context);
+    final orderProvider = Provider.of<OrderProvider>(context);
+    final addressProvider = Provider.of<AddressProvider>(context);
+    final addressList = addressProvider.addresses;
+
     final cart = cartProvider.cart;
     final discount = cartProvider.discount;
     final cartItems = cartProvider.cartItems;
 
-    /// order provider
-    final orderProvider = Provider.of<OrderProvider>(context);
-
-    void onTap(){
-      if(selectedIndex!=-1) {
-        orderProvider.initializeOrder(cartItems: cartItems,discount: discount,total: cart-discount,locationName: address[selectedIndex!]['title'],locationDetails: address[selectedIndex!]['subtitle']);
+    void onTap() {
+      if (selectedIndex != -1 && selectedIndex! < addressList.length) {
+        final selected = addressList[selectedIndex!];
+        orderProvider.initializeOrder(
+          cartItems: cartItems,
+          discount: discount,
+          total: cart - discount,
+          locationName: selected['name'],
+          locationDetails:
+          "Lat: ${selected['latitude']}, Long: ${selected['longitude']}",
+        );
         Navigator.pushNamed(context, '/paymentPage');
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Please select an address')),
+        );
       }
     }
 
@@ -64,6 +76,7 @@ class _AddresspageState extends State<Addresspage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              // Header
               Row(
                 children: [
                   BackButtonWidget(darkMode: darkMode),
@@ -71,28 +84,40 @@ class _AddresspageState extends State<Addresspage> {
                   Text(
                     'Deliver to',
                     style: TextStyle(
-                        fontSize: 18.sp,
-                        fontWeight: FontWeight.bold,
-                        color: darkMode ? Colors.white : Colors.black),
+                      fontSize: 18.sp,
+                      fontWeight: FontWeight.bold,
+                      color: darkMode ? Colors.white : Colors.black,
+                    ),
                   ),
                 ],
               ),
               SizedBox(height: 2.h),
+
+              // Address List
               Expanded(
-                child: address.isEmpty
-                    ? Center(child: Text("No Saved Address"))
+                child: addressList.isEmpty
+                    ? Center(
+                  child: Text(
+                    "No Saved Address",
+                    style: TextStyle(
+                      color: darkMode ? Colors.white70 : Colors.black54,
+                      fontSize: 16.sp,
+                    ),
+                  ),
+                )
                     : ListView.builder(
-                  itemCount: address.length + 1,
+                  itemCount: addressList.length + 1,
                   itemBuilder: (context, index) {
-                    if (index < address.length) {
-                      final item = address[index];
+                    if (index < addressList.length) {
+                      final item = addressList[index];
                       return Padding(
                         padding: EdgeInsets.only(bottom: 1.5.h),
                         child: Addresstile(
                           darkMode: darkMode,
                           icon: 'assets/maps.png',
-                          title: item['title'],
-                          subtitle: item['subtitle'],
+                          title: item['name'],
+                          subtitle:
+                          "Lat: ${item['latitude']}, Long: ${item['longitude']}",
                           isSelected: selectedIndex == index,
                           onTap: () {
                             setState(() {
@@ -113,8 +138,17 @@ class _AddresspageState extends State<Addresspage> {
                   },
                 ),
               ),
-              Bill(darkMode: darkMode, cartTotal: cart, discount: discount, total: cart-discount),
+
+              // Billing Info
+              Bill(
+                darkMode: darkMode,
+                cartTotal: cart,
+                discount: discount,
+                total: cart - discount,
+              ),
               SizedBox(height: 2.h),
+
+              // Next Button
               Center(
                 child: Cartbutton(
                   darkMode: darkMode,

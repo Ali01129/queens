@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:location/location.dart';
+import 'package:provider/provider.dart';
 import 'package:queens/components/backButton.dart';
-import 'package:queens/components/bottomSheet.dart';
+import '../database/address.dart';
 import 'package:queens/components/button.dart';
 import 'package:queens/components/colors/appColor.dart';
 
 import '../components/addressPage/addressBottomSheet.dart';
+import '../provider/addressProvider.dart';
 
 class MapPage extends StatefulWidget {
   const MapPage({super.key});
@@ -112,15 +114,44 @@ class _MapPageState extends State<MapPage> {
                     context,
                     darkMode: darkMode,
                     controller: locationController,
-                    onAdd: () {
-                      final locationName = locationController.text;
-                      print("Location added: $locationName");
-                      print('Current location: ${_currentPos!.latitude}, ${_currentPos!.longitude}');
+                    onAdd: () async {
+                      final locationName = locationController.text.trim();
 
-                      locationController.clear();
+                      if (locationName.isEmpty) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(content: Text("Location name cannot be empty")),
+                        );
+                        return;
+                      }
+
+                      if (_currentPos == null) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(content: Text("Current position not available")),
+                        );
+                        return;
+                      }
+
+                      try {
+                        final locationData = AddressData();
+                        await locationData.addLocation(
+                          locationName: locationName,
+                          latitude: _currentPos!.latitude,
+                          longitude: _currentPos!.longitude,
+                        );
+                        await Provider.of<AddressProvider>(context, listen: false).setAddresses();
+
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(content: Text("Location saved successfully")),
+                        );
+
+                        locationController.clear();
+                      } catch (e) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(content: Text("Error: ${e.toString()}")),
+                        );
+                      }
                     },
                   );
-                  // Your callback logic
                 },
               ),
             ),

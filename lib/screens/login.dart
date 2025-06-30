@@ -10,6 +10,7 @@ import 'package:responsive_sizer/responsive_sizer.dart';
 import '../components/alert_dialog.dart';
 import '../database/userData.dart';
 import '../navigation/bottom.dart';
+import '../provider/addressProvider.dart';
 import '../provider/cartProvider.dart';
 import '../provider/userProvider.dart';
 
@@ -60,6 +61,7 @@ class _LoginState extends State<Login> {
       /// ending
       Provider.of<CartProvider>(context, listen: false).setCart();
       Provider.of<Myordresprovider>(context,listen:false).setMyOrders();
+      await Provider.of<AddressProvider>(context, listen: false).setAddresses();
 
     } on FirebaseAuthException catch (e) {
       Navigator.pop(context);

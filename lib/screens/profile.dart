@@ -5,6 +5,7 @@ import 'package:queens/components/colors/appColor.dart';
 import 'package:queens/components/profile/profileTile.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import '../components/bottomSheet.dart';
+import '../provider/addressProvider.dart';
 import '../provider/cartProvider.dart';
 import '../provider/myOrdresProvider.dart';
 import '../provider/userProvider.dart';
@@ -18,6 +19,8 @@ class Profile extends StatelessWidget {
     Provider.of<UserProvider>(context, listen: false).clearUser();
     Provider.of<CartProvider>(context, listen: false).clearCart();
     Provider.of<Myordresprovider>(context,listen:false).clearMyOrder();
+    Provider.of<AddressProvider>(context, listen: false).clearAddresses();
+
 
     /// sining out
     await FirebaseAuth.instance.signOut();
