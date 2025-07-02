@@ -96,14 +96,17 @@ class _AddresspageState extends State<Addresspage> {
               // Address List
               Expanded(
                 child: addressList.isEmpty
-                    ? Center(
-                  child: Text(
-                    "No Saved Address",
-                    style: TextStyle(
-                      color: darkMode ? Colors.white70 : Colors.black54,
-                      fontSize: 16.sp,
+                    ? Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Addbutton(
+                      darkMode: darkMode,
+                      title: "Add Location +",
+                      onTapCallback: () {
+                        Navigator.pushNamed(context, '/mapPage');
+                      },
                     ),
-                  ),
+                  ],
                 )
                     : ListView.builder(
                   itemCount: addressList.length + 1,

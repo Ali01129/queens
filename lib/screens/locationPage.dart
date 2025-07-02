@@ -46,7 +46,7 @@ class Locationpage extends StatelessWidget {
               child: addressList.isEmpty
                   ? Center(
                 child: Text(
-                  "No Address found",
+                  "No Saved Address",
                   style: TextStyle(
                     color: darkMode ? Colors.white : Colors.black,
                     fontSize: 16.sp,
