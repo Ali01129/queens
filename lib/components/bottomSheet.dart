@@ -18,7 +18,7 @@ void showDeleteBottomSheet(BuildContext context, {required bool darkMode,require
           Icon(
             icon,
             size: 8.h,
-            color: AppColors.buttonPrimary,
+            color: darkMode?Colors.white:AppColors.buttonPrimary,
           ),
           SizedBox(height: 2.h),
           Text(text,

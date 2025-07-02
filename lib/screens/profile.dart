@@ -128,6 +128,15 @@ class Profile extends StatelessWidget {
                 SizedBox(height: 1.h),
                 Profiletile(
                   darkMode: darkMode,
+                  name: 'My Loactions',
+                  icon: Icon(Icons.location_on, color: AppColors.containerText),
+                  onTapCallback: () {
+                    Navigator.pushNamed(context, '/locationPage');
+                  },
+                ),
+                SizedBox(height: 1.h),
+                Profiletile(
+                  darkMode: darkMode,
                   name: 'Logout',
                   icon: Icon(Icons.power_settings_new, color: AppColors.containerText),
                   onTapCallback: () {

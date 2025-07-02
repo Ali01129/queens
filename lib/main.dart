@@ -10,6 +10,7 @@ import 'package:queens/provider/orderProvider.dart';
 import 'package:queens/screens/addressPage.dart';
 import 'package:queens/screens/bio.dart';
 import 'package:queens/screens/itemPage.dart';
+import 'package:queens/screens/locationPage.dart';
 import 'package:queens/screens/login.dart';
 import 'package:queens/screens/mapPage.dart';
 import 'package:queens/screens/messaging.dart';
@@ -77,6 +78,7 @@ class MyApp extends StatelessWidget {
             '/myOrders':(context)=>Myorders(),
             '/messaging':(context)=>Messaging(),
             '/mapPage':(context)=>MapPage(),
+            '/locationPage':(context)=>Locationpage(),
           },
           themeMode: ThemeMode.system,
           theme: ThemeData.light(),
