@@ -143,7 +143,7 @@ class _MapPageState extends State<MapPage> {
                         ScaffoldMessenger.of(context).showSnackBar(
                           SnackBar(content: Text("Location saved successfully")),
                         );
-                        Navigator.pushNamed(context, '/addressPage');
+                        Navigator.popUntil(context, ModalRoute.withName('/addressPage'));
                         locationController.clear();
                       } catch (e) {
                         ScaffoldMessenger.of(context).showSnackBar(
