@@ -61,7 +61,7 @@ class _LoginState extends State<Login> {
       /// ending
       Provider.of<CartProvider>(context, listen: false).setCart();
       Provider.of<Myordresprovider>(context,listen:false).setMyOrders();
-      await Provider.of<AddressProvider>(context, listen: false).setAddresses();
+      Provider.of<AddressProvider>(context, listen: false).setAddresses();
 
     } on FirebaseAuthException catch (e) {
       Navigator.pop(context);

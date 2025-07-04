@@ -19,6 +19,14 @@ class AddressProvider extends ChangeNotifier {
     addresses = [];
     notifyListeners();
   }
+
+  // delete a location
+  Future<void> deleteAddresses(String title) async {
+    final locationData = AddressData();
+    await locationData.deleteLocation(locationName: title);
+    await setAddresses(); // make sure this is async
+    notifyListeners();
+  }
 }
 
 

@@ -60,7 +60,15 @@ class Locationpage extends StatelessWidget {
 
                   return Padding(
                     padding: EdgeInsets.only(bottom: 1.h),
-                    child: Locationtile(darkMode: darkMode, title: address['name'], subtitle: "Lat: ${address['latitude']}, Long: ${address['longitude']}"),
+                    child: Locationtile(
+                        darkMode: darkMode,
+                        title: address['name'],
+                        subtitle: "Lat: ${address['latitude']}, Long: ${address['longitude']}",
+                      onDelete: (){
+                        Provider.of<AddressProvider>(context, listen: false).deleteAddresses(address['name']);
+                      },
+
+                    ),
                   );
                 },
               ),

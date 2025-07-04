@@ -5,25 +5,20 @@ import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import '../../provider/addressProvider.dart';
 import '../bottomSheet.dart';
-import '../../database/address.dart';
 
 class Locationtile extends StatelessWidget {
   final bool darkMode;
   final String title;
   final String subtitle;
+  final VoidCallback onDelete;
 
   Locationtile({
     super.key,
     required this.darkMode,
     required this.subtitle,
     required this.title,
+    required this.onDelete,
   });
-
-  final locationData = AddressData();
-  void remove(BuildContext context) async {
-    await locationData.deleteLocation(locationName: title);
-    Provider.of<AddressProvider>(context, listen: false).setAddresses();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -45,7 +40,7 @@ class Locationtile extends StatelessWidget {
                   icon: Icons.delete,
                   buttonText: "Yes, Delete",
                   onDelete: () {
-                    remove(context);
+                    onDelete();
                   },
                 ),
                 backgroundColor: darkMode

@@ -8,6 +8,7 @@ import 'package:queens/screens/login.dart';
 import '../provider/cartProvider.dart';
 import '../provider/myOrdresProvider.dart';
 import '../provider/userProvider.dart';
+import '../provider/addressProvider.dart';
 
 class AuthGate extends StatefulWidget {
   const AuthGate({super.key});
@@ -53,6 +54,7 @@ class _AuthGateState extends State<AuthGate> {
         Provider.of<UserProvider>(context, listen: false).setUser(userModel);
         Provider.of<CartProvider>(context, listen: false).setCart();
         Provider.of<Myordresprovider>(context,listen:false).setMyOrders();
+        Provider.of<AddressProvider>(context, listen: false).setAddresses();
       }
     } catch (e) {
       debugPrint('Error initializing user data: $e');
