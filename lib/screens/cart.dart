@@ -46,6 +46,14 @@ class Cart extends StatelessWidget {
                   color: darkMode ? Colors.white : Colors.black,
                 ),
               ),
+              SizedBox(height: 1.h),
+              Text(
+                "Swipe left to delete from cart",
+                style: TextStyle(
+                  fontSize: 16.sp,
+                  color: AppColors.containerText,
+                ),
+              ),
               SizedBox(height: 2.h),
               Expanded(
                 child: cartItems.isEmpty
