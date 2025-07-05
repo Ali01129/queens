@@ -4,8 +4,8 @@ import 'package:queens/components/home/categories.dart';
 import 'package:queens/components/home/horizontalScroll.dart';
 import 'package:queens/components/home/notification.dart';
 import 'package:queens/components/home/popular.dart';
+import 'package:queens/components/home/searchButton.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
-import '../components/home/searchBar.dart';
 
 class Home extends StatelessWidget {
   Home({super.key});
@@ -30,7 +30,7 @@ class Home extends StatelessWidget {
                 children: [
                   Row(
                     children: [
-                      Expanded(child: Searchbar(controller: searchController,darkMode: darkMode,)),
+                      Expanded(child: Searchbutton(darkMode: darkMode,)),
                       SizedBox(width: 2.w,),
                       NotificationIcon(darkMode: darkMode, hasNotification: true)
                     ],

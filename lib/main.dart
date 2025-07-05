@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:queens/components/home/searchPage.dart';
 import 'package:queens/components/order/myOrders.dart';
 import 'package:queens/components/home/categoriePage.dart';
 import 'package:queens/database/authGate.dart';
@@ -79,6 +80,7 @@ class MyApp extends StatelessWidget {
             '/messaging':(context)=>Messaging(),
             '/mapPage':(context)=>MapPage(),
             '/locationPage':(context)=>Locationpage(),
+            '/searchPage':(context)=>Searchpage(),
           },
           themeMode: ThemeMode.system,
           theme: ThemeData.light(),
