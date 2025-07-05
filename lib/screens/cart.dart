@@ -54,10 +54,7 @@ class Cart extends StatelessWidget {
                   itemCount: cartItems.length,
                   itemBuilder: (context, index) {
                     final item = cartItems[index];
-                    return Padding(
-                      padding: EdgeInsets.only(bottom: 1.5.h),
-                      child: Cartitem(image: item['image'], price: item['price'], name: item['name'], darkMode: darkMode, quantity: item['quantity'],onChanged: _loadData,),
-                    );
+                    return Cartitem(image: item['image'], price: item['price'], name: item['name'], darkMode: darkMode, quantity: item['quantity'],onChanged: _loadData,);
                   },
                 ),
               ),

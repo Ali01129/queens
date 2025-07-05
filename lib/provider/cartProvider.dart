@@ -34,6 +34,9 @@ class CartProvider extends ChangeNotifier {
     total=0.0;
     discount=0.0;
     delivery=5.0;
+    final cartData = CartData();
+    final uid = FirebaseAuth.instance.currentUser!.uid;
+    cartData.clearCart(userId: uid);
     notifyListeners();
   }
 }
