@@ -46,6 +46,8 @@ class _PaymentpageState extends State<Paymentpage> {
     final cartProvider = Provider.of<CartProvider>(context);
     final cart = cartProvider.cart;
     final discount = cartProvider.discount;
+    final delivery = cartProvider.delivery;
+
 
     /// order provider
     final orderProvider = Provider.of<OrderProvider>(context);
@@ -124,7 +126,7 @@ class _PaymentpageState extends State<Paymentpage> {
                   },
                 ),
               ),
-              Bill(darkMode: darkMode, cartTotal: cart, discount: discount, total: cart-discount),
+              Bill(darkMode: darkMode, cartTotal: cart, discount: discount,delivery: delivery, total: (cart-discount)+delivery),
               SizedBox(height: 2.h),
               Center(
                 child: Cartbutton(

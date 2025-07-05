@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
-
 import '../colors/appColor.dart';
 
 class Bill extends StatelessWidget {
@@ -8,30 +7,40 @@ class Bill extends StatelessWidget {
   final double cartTotal;
   final double discount;
   final double total;
-  const Bill({super.key,required this.darkMode,required this.cartTotal, required this.discount, required this.total});
+  final double delivery;
+
+  const Bill({
+    super.key,
+    required this.darkMode,
+    required this.cartTotal,
+    required this.discount,
+    required this.delivery,
+    required this.total,
+  });
 
   @override
   Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.all(4.w),
       decoration: BoxDecoration(
-        color: darkMode ? AppColors.darkcontainer:AppColors.lightcontainer,
+        color: darkMode ? AppColors.darkcontainer : AppColors.lightcontainer,
         borderRadius: BorderRadius.circular(2.w),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          /// Cart Total
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text("Cart Total",
-                style: TextStyle(
-                    color: AppColors.containerText
-                ),
+              Text(
+                "Cart Total",
+                style: TextStyle(color: AppColors.containerText),
               ),
               Text("£ $cartTotal"),
             ],
           ),
+
           Padding(
             padding: EdgeInsets.symmetric(vertical: 8.0),
             child: Divider(
@@ -39,17 +48,40 @@ class Bill extends StatelessWidget {
               color: Colors.grey,
             ),
           ),
+
+          /// Discount (only show if discount > 0)
+          if (discount > 0) ...[
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  "Discount",
+                  style: TextStyle(color: AppColors.containerText),
+                ),
+                Text("£ $discount"),
+              ],
+            ),
+            Padding(
+              padding: EdgeInsets.symmetric(vertical: 8),
+              child: Divider(
+                thickness: 1.5,
+                color: AppColors.containerText,
+              ),
+            ),
+          ],
+
+          /// Delivery Fee
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text("Discount",
-                style: TextStyle(
-                  color: AppColors.containerText,
-                ),
+              Text(
+                "Delivery Fee",
+                style: TextStyle(color: AppColors.containerText),
               ),
-              Text("£ $discount"),
+              Text("£ $delivery"),
             ],
           ),
+
           Padding(
             padding: EdgeInsets.symmetric(vertical: 8),
             child: Divider(
@@ -57,13 +89,14 @@ class Bill extends StatelessWidget {
               color: AppColors.containerText,
             ),
           ),
+
+          /// Total
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text("Total",
-                style: TextStyle(
-                    color: AppColors.containerText
-                ),
+              Text(
+                "Total",
+                style: TextStyle(color: AppColors.containerText),
               ),
               Text("£ $total"),
             ],

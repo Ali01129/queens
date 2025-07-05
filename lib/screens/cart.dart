@@ -27,6 +27,8 @@ class Cart extends StatelessWidget {
     final cartItems = cartProvider.cartItems;
     final cart = cartProvider.cart;
     final discount = cartProvider.discount;
+    final delivery = cartProvider.delivery;
+    final total=cartProvider.total;
 
     return Scaffold(
       backgroundColor: darkMode ? AppColors.darkbg : AppColors.lightbg,
@@ -59,7 +61,7 @@ class Cart extends StatelessWidget {
                   },
                 ),
               ),
-              Bill(darkMode: darkMode,cartTotal: cart,discount: discount,total: cart-discount,),
+              Bill(darkMode: darkMode,cartTotal: cart,discount: discount,delivery: delivery,total: total),
               SizedBox(height: 2.h,),
               Center(
                 child: Cartbutton(darkMode: darkMode, title: "PLACE MY ORDER", onTapCallback: (){

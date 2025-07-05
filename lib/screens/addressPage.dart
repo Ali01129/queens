@@ -47,7 +47,9 @@ class _AddresspageState extends State<Addresspage> {
 
     final cart = cartProvider.cart;
     final discount = cartProvider.discount;
+    final delivery = cartProvider.delivery;
     final cartItems = cartProvider.cartItems;
+    final total = cartProvider.total;
 
     void onTap() {
       if (selectedIndex != -1 && selectedIndex! < addressList.length) {
@@ -55,7 +57,9 @@ class _AddresspageState extends State<Addresspage> {
         orderProvider.initializeOrder(
           cartItems: cartItems,
           discount: discount,
-          total: cart - discount,
+          cartTotal: cart,
+          total: total,
+          delivery: delivery,
           locationName: selected['name'],
           locationDetails:
           "Lat: ${selected['latitude']}, Long: ${selected['longitude']}",
@@ -147,7 +151,8 @@ class _AddresspageState extends State<Addresspage> {
                 darkMode: darkMode,
                 cartTotal: cart,
                 discount: discount,
-                total: cart - discount,
+                delivery:delivery,
+                total: (cart - discount)+delivery,
               ),
               SizedBox(height: 2.h),
 

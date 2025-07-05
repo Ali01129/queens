@@ -6,6 +6,8 @@ class OrderProvider extends ChangeNotifier {
   List<Map<String, dynamic>> cartItems = [];
   double discount = 0.0;
   double total = 0.0;
+  double delivery=0.0;
+  double cartTotal=0.0;
   String locationName = 'unknown';
   String locationDetails = 'unknown';
   String paymentMethod = 'unknown';
@@ -16,11 +18,15 @@ class OrderProvider extends ChangeNotifier {
     required List<Map<String, dynamic>> cartItems,
     required double discount,
     required double total,
+    required double cartTotal,
+    required double delivery,
     required String locationName,
     required String locationDetails,
   }) {
     this.cartItems = cartItems;
     this.discount = discount;
+    this.delivery=delivery;
+    this.cartTotal=cartTotal;
     this.total = total;
     this.locationName = locationName;
     this.locationDetails = locationDetails;
@@ -37,6 +43,7 @@ class OrderProvider extends ChangeNotifier {
     cartItems = [];
     discount = 0.0;
     total = 0.0;
+    cartTotal=0.0;
     locationName = '';
     locationDetails = '';
     paymentMethod = '';
@@ -50,6 +57,8 @@ class OrderProvider extends ChangeNotifier {
       userId: uid,
       cartItems: cartItems,
       discount: discount,
+      delivery:delivery,
+      cartTotal:cartTotal,
       total: total,
       locationName: locationName,
       locationDetails: locationDetails,
