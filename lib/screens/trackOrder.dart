@@ -18,6 +18,7 @@ class _TrackorderState extends State<Trackorder> {
   late TextEditingController trackController;
   FocusNode trackFocusNode = FocusNode();
   Map<String, dynamic>? order;
+  bool noOrderFound = false;
 
   @override
   void initState() {
@@ -28,6 +29,7 @@ class _TrackorderState extends State<Trackorder> {
   @override
   void dispose() {
     trackController.dispose();
+    trackFocusNode.dispose();
     super.dispose();
   }
 
@@ -36,15 +38,20 @@ class _TrackorderState extends State<Trackorder> {
   }
 
   void onTap() async {
+    // Unfocus the text field
+    trackFocusNode.unfocus();
+
     if (trackController.text.isNotEmpty) {
       final result = await Order().trackOrder(orderId: trackController.text);
-      if (result == null) {
-        print('Order not found');
-      } else {
-        setState(() {
+      setState(() {
+        if (result == null) {
+          order = null;
+          noOrderFound = true;
+        } else {
           order = result;
-        });
-      }
+          noOrderFound = false;
+        }
+      });
     }
   }
 
@@ -87,10 +94,22 @@ class _TrackorderState extends State<Trackorder> {
                   bg: AppColors.buttonPrimary,
                   onTapCallback: onTap,
                 ),
+                if (noOrderFound)
+                  Padding(
+                    padding: EdgeInsets.only(top: 5.h),
+                    child: Text(
+                      "No order found",
+                      style: TextStyle(
+                        fontSize: 17.sp,
+                        fontWeight: FontWeight.w500,
+                        color: darkMode ? Colors.white70 : Colors.black54,
+                      ),
+                    ),
+                  ),
                 if (order != null) ...[
                   SizedBox(height: 2.h),
-                  TrackDetails(order: order!, darkMode: darkMode,),
-                ]
+                  TrackDetails(order: order!, darkMode: darkMode),
+                ],
               ],
             ),
           ),

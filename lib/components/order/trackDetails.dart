@@ -46,7 +46,7 @@ class TrackDetails extends StatelessWidget {
             children: [
               Icon(
                 isDelivered ? Icons.check_circle_outline : Icons.local_shipping,
-                color: isDelivered ? Colors.green : AppColors.buttonPrimary,
+                color: isDelivered ? Colors.green : AppColors.lightbg,
               ),
               SizedBox(width: 2.w),
               Text(
@@ -71,10 +71,10 @@ class TrackDetails extends StatelessWidget {
                 ),
                 child: Row(
                   children: [
-                    Icon(Icons.location_on, color: darkMode ? Colors.white : Colors.black),
+                    Icon(Icons.currency_pound, color: darkMode ? Colors.white : Colors.black),
                     SizedBox(width: 2.w),
                     Text(
-                      order['locationName'],
+                      order['total'].toString(),
                       style: TextStyle(
                         color: darkMode ? Colors.white : Colors.black,
                         fontSize: 16.sp,
@@ -94,10 +94,60 @@ class TrackDetails extends StatelessWidget {
                 ),
                 child: Row(
                   children: [
-                    Icon(Icons.currency_pound, color: darkMode ? Colors.white : Colors.black),
+                    Icon(Icons.location_on, color: darkMode ? Colors.white : Colors.black),
                     SizedBox(width: 2.w),
                     Text(
-                      order['total'].toString(),
+                      order['locationName'],
+                      style: TextStyle(
+                        color: darkMode ? Colors.white : Colors.black,
+                        fontSize: 16.sp,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ],
+        ),
+        Row(
+          children: [
+            Expanded(
+              child: Container(
+                padding: EdgeInsets.all(4.w),
+                margin: EdgeInsets.only(top: 2.h, right: 2.w),
+                decoration: BoxDecoration(
+                  color: darkMode ? AppColors.darkcontainer : AppColors.lightcontainer,
+                  borderRadius: BorderRadius.circular(20),
+                ),
+                child: Row(
+                  children: [
+                    Icon(Icons.local_shipping, color: darkMode ? Colors.white : Colors.black),
+                    SizedBox(width: 2.w),
+                    Text(
+                      order['delivery'].toString(),
+                      style: TextStyle(
+                        color: darkMode ? Colors.white : Colors.black,
+                        fontSize: 16.sp,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            Expanded(
+              child: Container(
+                padding: EdgeInsets.all(4.w),
+                margin: EdgeInsets.only(top: 2.h, left: 2.w),
+                decoration: BoxDecoration(
+                  color: darkMode ? AppColors.darkcontainer : AppColors.lightcontainer,
+                  borderRadius: BorderRadius.circular(20),
+                ),
+                child: Row(
+                  children: [
+                    Icon(Icons.discount, color: darkMode ? Colors.white : Colors.black),
+                    SizedBox(width: 2.w),
+                    Text(
+                      order['discount'].toString(),
                       style: TextStyle(
                         color: darkMode ? Colors.white : Colors.black,
                         fontSize: 16.sp,
@@ -159,7 +209,7 @@ class TrackDetails extends StatelessWidget {
             ),
           ],
         ),
-        SizedBox(height: 2.h),
+        SizedBox(height: 1.h),
         Column(
           children: List.generate(order['cartItems'].length, (index) {
             final item = order['cartItems'][index];
