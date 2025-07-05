@@ -42,6 +42,20 @@ class Locationpage extends StatelessWidget {
                 ],
               ),
             ),
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 4.w),
+              child: Align(
+                alignment: Alignment.centerLeft,
+                child: Text(
+                  "Swipe left to delete saved Location",
+                  style: TextStyle(
+                    fontSize: 16.sp,
+                    color: AppColors.containerText,
+                  ),
+                ),
+              ),
+            ),
+            SizedBox(height: 2.h,),
             Expanded(  // This makes the listview take remaining space
               child: addressList.isEmpty
                   ? Center(
