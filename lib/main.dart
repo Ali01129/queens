@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:queens/components/home/searchPage.dart';
 import 'package:queens/components/order/myOrders.dart';
 import 'package:queens/components/home/categoriePage.dart';
+import 'package:queens/components/profile/appSettings.dart';
+import 'package:queens/components/profile/changePassword.dart';
+import 'package:queens/components/profile/personalInfo.dart';
 import 'package:queens/database/authGate.dart';
 import 'package:queens/navigation/bottom.dart';
 import 'package:queens/provider/addressProvider.dart';
@@ -81,6 +84,9 @@ class MyApp extends StatelessWidget {
             '/mapPage':(context)=>MapPage(),
             '/locationPage':(context)=>Locationpage(),
             '/searchPage':(context)=>Searchpage(),
+            '/changePassword':(context)=>Changepassword(),
+            '/appSettings':(context)=>Appsettings(),
+            '/personalInfo':(context)=>Personalinfo(),
           },
           themeMode: ThemeMode.system,
           theme: ThemeData.light(),

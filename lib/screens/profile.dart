@@ -98,7 +98,18 @@ class Profile extends StatelessWidget {
                   darkMode: darkMode,
                   name: 'Personal Information',
                   icon: Icon(Icons.person, color: AppColors.containerText),
-                  onTapCallback: () {},
+                  onTapCallback: () {
+                    Navigator.pushNamed(context, '/personalInfo');
+                  },
+                ),
+                SizedBox(height: 1.h),
+                Profiletile(
+                  darkMode: darkMode,
+                  name: 'Change Password',
+                  icon: Icon(Icons.lock, color: AppColors.containerText),
+                  onTapCallback: () {
+                    Navigator.pushNamed(context, '/changePassword');
+                  },
                 ),
                 SizedBox(height: 1.h),
                 Profiletile(
@@ -123,7 +134,9 @@ class Profile extends StatelessWidget {
                   darkMode: darkMode,
                   name: 'App Settings',
                   icon: Icon(Icons.settings, color: AppColors.containerText),
-                  onTapCallback: () {},
+                  onTapCallback: () {
+                    Navigator.pushNamed(context, '/appSettings');
+                  },
                 ),
                 SizedBox(height: 1.h),
                 Profiletile(
