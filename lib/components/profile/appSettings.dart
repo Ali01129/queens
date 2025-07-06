@@ -4,8 +4,15 @@ import 'package:responsive_sizer/responsive_sizer.dart';
 import '../backButton.dart';
 import '../colors/appColor.dart';
 
-class Appsettings extends StatelessWidget {
+class Appsettings extends StatefulWidget {
   const Appsettings({super.key});
+
+  @override
+  State<Appsettings> createState() => _AppsettingsState();
+}
+
+class _AppsettingsState extends State<Appsettings> {
+  bool isNotificationOn = true;
 
   bool isDarkMode(BuildContext context) {
     return Theme.of(context).brightness == Brightness.dark;
@@ -13,7 +20,6 @@ class Appsettings extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     bool darkMode = isDarkMode(context);
 
     return Scaffold(
@@ -36,6 +42,29 @@ class Appsettings extends StatelessWidget {
                         fontWeight: FontWeight.bold,
                         color: darkMode ? Colors.white : Colors.black,
                       ),
+                    ),
+                  ],
+                ),
+                SizedBox(height: 4.h),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      "Notifications",
+                      style: TextStyle(
+                        fontSize: 17.sp,
+                        fontWeight: FontWeight.w500,
+                        color: darkMode ? Colors.white : Colors.black,
+                      ),
+                    ),
+                    Switch(
+                      value: isNotificationOn,
+                      activeColor: AppColors.buttonPrimary,
+                      onChanged: (value) {
+                        setState(() {
+                          isNotificationOn = value;
+                        });
+                      },
                     ),
                   ],
                 ),

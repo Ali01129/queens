@@ -49,6 +49,7 @@ class _AuthGateState extends State<AuthGate> {
           gender: data['gender'],
           phone: data['phoneNumber'],
           email: data['email'],
+          date: data['dateOfBirth'],
         );
 
         Provider.of<UserProvider>(context, listen: false).setUser(userModel);

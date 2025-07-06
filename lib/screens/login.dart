@@ -57,7 +57,7 @@ class _LoginState extends State<Login> {
       /// adding data in provider
       final userValue = Provider.of<UserProvider>(context, listen: false);
       final data = await UserData().getUserData();
-      UserModel _user=UserModel(name: data?['name'], image: data?['imageUrl'], gender: data?['gender'], phone: data?['phoneNumber'], email:data?['email']);
+      UserModel _user=UserModel(date: data?['dateOfBirth'],name: data?['name'], image: data?['imageUrl'], gender: data?['gender'], phone: data?['phoneNumber'], email:data?['email']);
       userValue.setUser(_user);
       /// ending
       Provider.of<CartProvider>(context, listen: false).setCart();

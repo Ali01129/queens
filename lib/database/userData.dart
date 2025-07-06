@@ -37,4 +37,29 @@ class UserData {
       return null;
     }
   }
+
+// Method to update existing user data
+  Future<void> updateUserData({
+    required String name,
+    required String gender,
+    required String phoneNumber,
+    required String dateOfBirth,
+  }) async {
+    final uid = FirebaseAuth.instance.currentUser!.uid;
+    final firestore = FirebaseFirestore.instance;
+
+    try {
+      await firestore.collection('users').doc(uid).update({
+        'name': name,
+        'gender': gender,
+        'phoneNumber': phoneNumber,
+        'dateOfBirth': dateOfBirth,
+        'updatedAt': FieldValue.serverTimestamp(), // optional
+      });
+    } on FirebaseException catch (e) {
+      print("Failed to update user data: ${e.message}");
+      rethrow; // Rethrow to handle it where this function is called
+    }
+  }
+
 }

@@ -107,6 +107,7 @@ class _BioState extends State<Bio> {
                     ),
                     SizedBox(height: 3.h),
                     GenderDropdown(
+                      initialVal: 'Male',
                       onGenderChanged: (gender) {
                         setState(() {
                           selectedGender = gender;
