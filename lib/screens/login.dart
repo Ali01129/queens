@@ -59,7 +59,6 @@ class _LoginState extends State<Login> {
       final data = await UserData().getUserData();
       UserModel _user=UserModel(date: data?['dateOfBirth'],name: data?['name'], image: data?['imageUrl'], gender: data?['gender'], phone: data?['phoneNumber'], email:data?['email']);
       userValue.setUser(_user);
-      /// ending
       Provider.of<CartProvider>(context, listen: false).setCart();
       Provider.of<Myordresprovider>(context,listen:false).setMyOrders();
       Provider.of<AddressProvider>(context, listen: false).setAddresses();
