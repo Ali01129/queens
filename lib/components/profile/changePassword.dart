@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-
 import '../backButton.dart';
 import '../button.dart';
 import '../colors/appColor.dart';

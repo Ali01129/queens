@@ -4,6 +4,7 @@ import 'package:queens/components/order/myOrders.dart';
 import 'package:queens/components/home/categoriePage.dart';
 import 'package:queens/components/profile/appSettings.dart';
 import 'package:queens/components/profile/changePassword.dart';
+import 'package:queens/components/profile/forgetPassword.dart';
 import 'package:queens/components/profile/personalInfo.dart';
 import 'package:queens/database/authGate.dart';
 import 'package:queens/navigation/bottom.dart';
@@ -87,6 +88,7 @@ class MyApp extends StatelessWidget {
             '/changePassword':(context)=>Changepassword(),
             '/appSettings':(context)=>Appsettings(),
             '/personalInfo':(context)=>Personalinfo(),
+            '/forgetPassword':(context)=>Forgetpassword(),
           },
           themeMode: ThemeMode.system,
           theme: ThemeData.light(),

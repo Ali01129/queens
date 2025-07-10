@@ -147,10 +147,15 @@ class _LoginState extends State<Login> {
                 Button(title: "SIGN IN", textColor: Colors.white, bg: AppColors.buttonPrimary, onTapCallback: login),
                 SizedBox(height: 3.h,),
                 Center(
-                  child: Text("Forgot Password?",
-                    style: TextStyle(
-                      fontSize: 16.sp,
-                      color: Color(0xFF0d5ef9)
+                  child: GestureDetector(
+                    onTap: (){
+                      Navigator.pushNamed(context, '/forgetPassword');
+                    },
+                    child: Text("Forgot Password?",
+                      style: TextStyle(
+                        fontSize: 16.sp,
+                        color: Color(0xFF0d5ef9)
+                      ),
                     ),
                   ),
                 ),
