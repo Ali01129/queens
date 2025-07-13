@@ -8,6 +8,7 @@ import 'package:queens/components/profile/forgetPassword.dart';
 import 'package:queens/components/profile/personalInfo.dart';
 import 'package:queens/database/authGate.dart';
 import 'package:queens/navigation/bottom.dart';
+import 'package:queens/notification/push_notification.dart';
 import 'package:queens/provider/addressProvider.dart';
 import 'package:queens/provider/categorieProvider.dart';
 import 'package:queens/provider/myOrdresProvider.dart';
@@ -42,6 +43,7 @@ void main() async{
       url: "https://wchadsxxtwetepaarxki.supabase.co",
       anonKey: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndjaGFkc3h4dHdldGVwYWFyeGtpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDU4NjE0ODUsImV4cCI6MjA2MTQzNzQ4NX0.fZMYjsc7JaazScrlzdniLjj5t2zEty1hg5R3_MSTc3k"
   );
+  await push_notifications().initNotifications();
   runApp(
       MultiProvider(
         providers: [
@@ -62,9 +64,11 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
     return ResponsiveSizer(
       builder: (context, orientation, screenType) {
         return MaterialApp(
+          navigatorKey: navigatorKey,
           debugShowCheckedModeBanner: false,
           initialRoute: '/',
           routes: {
