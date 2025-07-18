@@ -3,4 +3,5 @@
 Queens Girl and Fish Bar
 
 app coming soon on play store and app store
-almost complete
+i have tested it on a new app and there are errors
+gota fix those
