@@ -40,8 +40,8 @@ void main() async{
     options: DefaultFirebaseOptions.currentPlatform,
   );
   await Supabase.initialize(
-      url: "https://wchadsxxtwetepaarxki.supabase.co",
-      anonKey: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndjaGFkc3h4dHdldGVwYWFyeGtpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDU4NjE0ODUsImV4cCI6MjA2MTQzNzQ4NX0.fZMYjsc7JaazScrlzdniLjj5t2zEty1hg5R3_MSTc3k"
+      url: "https://rluyuhtglahwtlusciac.supabase.co",
+      anonKey: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJsdXl1aHRnbGFod3RsdXNjaWFjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjE0NjUwMjksImV4cCI6MjA3NzA0MTAyOX0.KWo9jZNc_b8EUg5vn_kByymknt_nva5gt0OybrvaI5A"
   );
   await push_notifications().initNotifications();
   runApp(

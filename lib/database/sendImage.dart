@@ -16,7 +16,7 @@ class sendImage {
 
       // Upload the image
       final response = await Supabase.instance.client.storage
-          .from('queenimages')
+          .from('images')
           .upload(fileName, imageFile);
 
       if (response.isEmpty) {
@@ -26,7 +26,7 @@ class sendImage {
 
       // Get the public URL
       final String publicUrl = Supabase.instance.client.storage
-          .from('queenimages')
+          .from('images')
           .getPublicUrl(fileName);
 
       return publicUrl;
