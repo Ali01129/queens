@@ -69,7 +69,7 @@ class Cart extends StatelessWidget {
               Bill(darkMode: darkMode,cartTotal: cart,discount: discount,delivery: delivery,total: total),
               SizedBox(height: 2.h,),
               Center(
-                child: Cartbutton(darkMode: darkMode, title: "PLACE MY ORDER", onTapCallback: (){
+                child: Cartbutton(darkMode: darkMode, title: "PLACE MY ORDER", isDisabled: cartItems.isEmpty, onTapCallback: (){
                   if(!cartItems.isEmpty) {
                     Navigator.pushNamed(context, '/addressPage');
                   }

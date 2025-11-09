@@ -15,7 +15,7 @@ class _BottomState extends State<Bottom> {
   final List<Widget> _pages = [
     Home(),
     Cart(),
-    Messaging(),
+    // Messaging(),
     Profile(),
   ];
 
@@ -67,10 +67,10 @@ class _BottomState extends State<Bottom> {
               icon: Icon(Icons.shopping_cart, color: getIconColor(1, darkMode)),
               label: 'Cart',
             ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.message_rounded, color: getIconColor(2, darkMode)),
-              label: 'Messages',
-            ),
+            // BottomNavigationBarItem(
+            //   icon: Icon(Icons.message_rounded, color: getIconColor(2, darkMode)),
+            //   label: 'Messages',
+            // ),
             BottomNavigationBarItem(
               icon: Icon(Icons.person_rounded, color: getIconColor(3, darkMode)),
               label: 'Profile',

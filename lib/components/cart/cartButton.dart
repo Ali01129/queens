@@ -6,12 +6,14 @@ class Cartbutton extends StatelessWidget {
   final String title;
   final bool darkMode;
   final VoidCallback onTapCallback;
+  final bool? isDisabled;
 
   const Cartbutton({
     super.key,
     required this.darkMode,
     required this.title,
     required this.onTapCallback,
+    this.isDisabled,
   });
 
   @override
@@ -21,7 +23,7 @@ class Cartbutton extends StatelessWidget {
       child: Container(
         padding: EdgeInsets.symmetric(vertical: 4.w, horizontal: 8.w),
         decoration: BoxDecoration(
-          color: AppColors.buttonPrimary,
+          color: isDisabled != null && isDisabled! ? Color.fromARGB(255, 132, 172, 247) : AppColors.buttonPrimary,
           borderRadius: BorderRadius.circular(3.w),
         ),
         child: Text(

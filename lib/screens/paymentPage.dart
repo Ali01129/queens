@@ -133,6 +133,7 @@ class _PaymentpageState extends State<Paymentpage> {
                   darkMode: darkMode,
                   title: "NEXT",
                   onTapCallback: onTap,
+                  isDisabled: selectedIndex == -1 || selectedIndex == 1,
                 ),
               ),
             ],
