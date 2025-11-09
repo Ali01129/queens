@@ -15,8 +15,8 @@ class _HorizontalImageCarouselState extends State<HorizontalImageCarousel> {
 
   final List<String> images = [
     'assets/offer.png',
-    'assets/offer.png',
-    'assets/onboarding.png',
+    'assets/offer_2.png',
+    'assets/offer_3.png',
   ];
 
   @override
