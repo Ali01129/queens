@@ -162,6 +162,7 @@ class _AddresspageState extends State<Addresspage> {
                   darkMode: darkMode,
                   title: "NEXT",
                   onTapCallback: onTap,
+                  isDisabled: selectedIndex == -1,
                 ),
               ),
             ],

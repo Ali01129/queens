@@ -31,8 +31,8 @@ class Home extends StatelessWidget {
                   Row(
                     children: [
                       Expanded(child: Searchbutton(darkMode: darkMode,)),
-                      SizedBox(width: 2.w,),
-                      NotificationIcon(darkMode: darkMode, hasNotification: true)
+                      // SizedBox(width: 2.w,),
+                      // NotificationIcon(darkMode: darkMode, hasNotification: true)
                     ],
                   ),
                   SizedBox(height: 2.h,),
