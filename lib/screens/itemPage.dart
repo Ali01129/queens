@@ -54,7 +54,7 @@ class Itempage extends StatelessWidget {
                         ),
                         Positioned(
                           top: 2.h,
-                          left: 2.w,
+                          left: 4.w,
                           child: BackButtonWidget(darkMode: darkMode),
                         ),
                       ],
