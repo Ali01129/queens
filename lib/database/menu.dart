@@ -32,7 +32,7 @@ class Menu {
       "price": 60,
       "calories": 300,
       "rating": 4.2,
-      "category": "Burger"
+      "category": "Fish&chips"
     },
     {
       "name": "Veggie Wrap",
